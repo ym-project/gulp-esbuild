@@ -20,7 +20,7 @@ function build() {
         .pipe(dest('./dist'))
 }
 
-exports.build
+exports.build = build
 ```
 `package.json`
 ```json
@@ -37,8 +37,8 @@ npm run build
 
 ### Plugin arguments
 
-All available options you can find in the typescript declaration file in official repository [https://github.com/evanw/esbuild/blob/master/lib/types.ts](https://github.com/evanw/esbuild/blob/master/lib/types.ts).
+You can find all available options in the typescript declaration file in the official repository [https://github.com/evanw/esbuild/blob/master/lib/types.ts](https://github.com/evanw/esbuild/blob/master/lib/types.ts).
 
-Pay attention to interfaces such as: `CommonOptions` and `BuildOptions`.
+PPay attention to such interfaces as `CommonOptions` and `BuildOptions`.
 
-Another interfaces don't use in this plugin.
+Other interfaces aren't used in this plugin.
