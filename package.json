@@ -1,0 +1,27 @@
+{
+  "name": "gulp-esbuild",
+  "version": "0.0.1",
+  "description": "gulp plugin for esbuild bundler",
+  "keywords": [
+    "gulpplugin"
+  ],
+  "author": {
+    "name": "ym-project",
+    "email": "ym-project@protonmail.com",
+    "url": "https://github.com/ym-project"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ym-project/gulp-esbuild"
+  },
+  "homepage": "https://github.com/ym-project/gulp-esbuild#readme",
+  "bugs": "https://github.com/ym-project/gulp-esbuild/issues",
+  "license": "MIT",
+  "main": "index.js",
+  "dependencies": {
+    "esbuild": "^0.6.2",
+    "plugin-error": "^1.0.1",
+    "vinyl": "^2.2.0"
+  },
+  "devDependencies": {}
+}
