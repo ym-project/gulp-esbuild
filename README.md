@@ -1,5 +1,7 @@
 ### Install
-`npm install gulp-esbuild`
+```bash
+npm install gulp-esbuild
+```
 
 ### Example
 
@@ -39,6 +41,6 @@ npm run build
 
 You can find all available options in the typescript declaration file in the official repository [https://github.com/evanw/esbuild/blob/master/lib/types.ts](https://github.com/evanw/esbuild/blob/master/lib/types.ts).
 
-PPay attention to such interfaces as `CommonOptions` and `BuildOptions`.
+Pay attention to such interfaces as `CommonOptions` and `BuildOptions`.
 
 Other interfaces aren't used in this plugin.
