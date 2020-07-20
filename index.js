@@ -35,7 +35,7 @@ module.exports = function(options = {}) {
             try {
                 data = await build(params)
             } catch(err) {
-                throw new PluginError(PLUGIN_NAME, err)
+                return cb(new PluginError(PLUGIN_NAME, err))
             }
 
             const { outputFiles } = data
