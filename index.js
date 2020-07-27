@@ -4,7 +4,6 @@ const PluginError = require('plugin-error')
 const Vinyl = require('vinyl')
 
 const PLUGIN_NAME = 'gulp-esbuild'
-const DEFAULT_OPTIONS = {}
 
 module.exports = function(options = {}) {
     const entries = []
