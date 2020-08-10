@@ -1,9 +1,13 @@
-### Install
+# gulp-esbuild
+
+gulp plugin for [esbuild](https://github.com/evanw/esbuild) bundler
+
+## Install
 ```bash
 npm install gulp-esbuild
 ```
 
-### Example
+## Example
 
 `gulpfile.js`
 ```js
@@ -37,7 +41,7 @@ exports.build = build
 npm run build
 ```
 
-### Plugin arguments
+## Plugin arguments
 
 You can find all available options in the typescript declaration file in the official repository [https://github.com/evanw/esbuild/blob/master/lib/types.ts](https://github.com/evanw/esbuild/blob/master/lib/types.ts).
 
