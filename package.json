@@ -30,6 +30,7 @@
     "vinyl": "^2.2.0"
   },
   "devDependencies": {
+    "husky": "^4.2.5",
     "jest": "^26.4.0"
   }
 }
