@@ -76,7 +76,7 @@ test('minify bundle', async () => {
 
     stream.on('data', file => {
         expect(file.contents.toString()).toBe(
-`(()=>{const a=10;console.log(a);})();
+`(()=>{const o=10;console.log(o);})();
 `
         )
     })
