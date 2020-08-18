@@ -11,8 +11,8 @@ module.exports = function(options = {}) {
     return new Transform({
         objectMode: true,
         transform(file, _, cb) {
-            if (file.isNull()) {
-                return
+            if (!file.isBuffer()) {
+                return cb(new PluginError(PLUGIN_NAME, new TypeError('file should be a buffer')))
             }
 
             if (!options.entryPoints) {
