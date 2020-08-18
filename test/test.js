@@ -1,155 +1,88 @@
 const gulpEsbuild = require('..')
-const path = require('path')
 const File = require('vinyl')
+const path = require('path')
 
 /*
-** test CommonOptions
+** TESTS
 */
 
-describe('test CommonOptions', () => {
-    describe('sourcemap', () => {
-        test('boolean', done => {
-            const stream = gulpEsbuild({
-                outfile:   'bundle.js',
-                sourcemap: false
-            })
-            execute(stream, {contents:
-`console.log("hello, world");
+test('prefer entryPoints option to src file', done => {
+    const stream = gulpEsbuild({
+        outdir: './',
+        entryPoints: [
+            resolve('a.js'),
+            resolve('b.js')
+        ]
+    })
+
+    execute(stream, [
+`console.log("a.js");
 `
-            }).then(done, done)
-
-            stream.write(new File({
-                path:     resolve('for-sourcemap.js'),
-                contents: Buffer.from('')
-            }))
-            stream.end()
-        })
-
-        // TODO: incorrect working. Should be fix soon
-        //
-//         test('inline', done => {
-//             const stream = gulpEsbuild({
-//                 outfile:   'bundle.js',
-//                 sourcemap: 'inline'
-//             })
-//             execute(stream, {contents:
-// `console.log("hello, world");
-// //# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidGVzdC9maXh0dXJlcy9hLmpzIl0sCiAgInNvdXJjZXNDb250ZW50IjogWyJjb25zb2xlLmxvZygnaGVsbG8sIHdvcmxkJylcbiJdLAogICJtYXBwaW5ncyI6ICJBQUFBLFFBQVEsSUFBSTsiLAogICJuYW1lcyI6IFtdCn0K
-// `
-//             }).then(done, done)
-
-//             stream.write(new File({
-//                 path:     resolve('for-sourcemap.js'),
-//                 contents: Buffer.from('')
-//             }))
-//             stream.end()
-//         })
-
-//         test('external', done => {
-//             const stream = gulpEsbuild({
-//                 outfile:   'bundle.js',
-//                 sourcemap: 'external'
-//             })
-//             execute(stream, [{
-//                 contents:
-// `console.log("hello, world");
-// {
-//   "version": 3,
-//   "sources": ["test/fixtures/a.js"],
-//   "sourcesContent": ["console.log('hello, world')\\n"],
-//   "mappings": "AAAA,QAAQ,IAAI;",
-//   "names": []
-// }
-// `
-//             }, {
-//                 contents:
-// `
-// `
-//             }]).then(done, done)
-
-//             const file = new File({
-//                 path:     resolve('for-sourcemap.js'),
-//                 contents: Buffer.from('')
-//             })
-//             // file.sourceMap = {}
-
-//             stream.write(file)
-//             stream.end()
-//         })
-    })
-
-    describe('target', () => {
-        it('es2015', done => {
-            const stream = gulpEsbuild({
-                outfile: 'bundle.js',
-                target:  'es2015'
-            })
-            execute(stream, {contents:
-`class A {
-  constructor() {
-    this.field = "value";
-  }
-  method(...args) {
-    args.forEach((arg) => console.log(arg));
-  }
-}
+    ,
+`console.log("b.js");
 `
-            }).then(done, done)
+    ]).then(done, done)
 
-            stream.write(new File({
-                path:     resolve('for-target.js'),
-                contents: Buffer.from('')
-            }))
-            stream.end()
-        })
+    stream.write(new File({
+        path:     resolve('a.js'),
+        contents: Buffer.from('')
+    }))
+    stream.end()
+})
 
-        it('esnext', done => {
-            const stream = gulpEsbuild({
-                outfile: 'bundle.js',
-                target:  'esnext'
-            })
-            execute(stream, {contents:
-`class A {
-  field = "value";
-  method(...args) {
-    args.forEach((arg) => console.log(arg));
-  }
-}
+test('entry files number === output files number', done => {
+    const stream = gulpEsbuild({
+        outdir: './'
+    })
+
+    execute(stream, [
+`console.log("a.js");
 `
-            }).then(done, done)
+    ,
+`console.log("b.js");
+`
+    ]).then(done, done)
 
-            stream.write(new File({
-                path:     resolve('for-target.js'),
-                contents: Buffer.from('')
-            }))
-            stream.end()
-        })
+    stream.write(new File({
+        path:     resolve('a.js'),
+        contents: Buffer.from('')
+    }))
+    stream.write(new File({
+        path:     resolve('b.js'),
+        contents: Buffer.from('')
+    }))
+    stream.end()
+})
+
+test('bundle works', done => {
+    const stream = gulpEsbuild({
+        outfile: 'bundle.js',
+        bundle: true
     })
 
-    describe('strict', () => {
+    execute(stream, [
+`(() => {
+  // test/fixtures/a.js
+  console.log("a.js");
 
-    })
+  // test/fixtures/b.js
+  console.log("b.js");
 
-    describe('minify', () => {
+  // test/fixtures/c.js
+})();
+`
+    ]).then(done, done)
 
-    })
-
-    describe('jsx', () => {
-
-    })
-
-    describe('define', () => {
-
-    })
-
-    describe('pure', () => {
-
-    })
+    stream.write(new File({
+        path:     resolve('c.js'),
+        contents: Buffer.from('')
+    }))
+    stream.end()
 })
 
 
 /*
-** helpers
+** HELPERS
 */
 
 function resolve(name) {
@@ -196,7 +129,8 @@ function executeAll(stream, expected) {
             const expectedItem = expected[index]
             const fileContents = file.contents.toString()
 
-            expect(fileContents).toBe(expectedItem.contents)
+            expect(fileContents).toBe(expectedItem)
+            index++
         }
 
         return Promise.resolve()
