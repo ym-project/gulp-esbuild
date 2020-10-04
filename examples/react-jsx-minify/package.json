@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "gulp build"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-esbuild": "^0.1.19"
+  }
+}
