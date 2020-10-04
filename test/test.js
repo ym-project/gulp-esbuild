@@ -67,8 +67,6 @@ test('bundle works', done => {
 
   // test/fixtures/b.js
   console.log("b.js");
-
-  // test/fixtures/c.js
 })();
 `
     ]).then(done, done)
