@@ -9,6 +9,6 @@
   },
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-esbuild": "^0.1.19"
+    "gulp-esbuild": "latest"
   }
 }
