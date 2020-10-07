@@ -1,3 +1,5 @@
 test
 examples
-.huskyrc.json
+.huskyrc.js
+.eslintignore
+.eslintrc.js
