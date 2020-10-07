@@ -22,7 +22,8 @@
     "node": ">=8.6.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint './**/*.js'"
   },
   "dependencies": {
     "esbuild": "^0.7.11",
@@ -30,6 +31,7 @@
     "vinyl": "^2.2.1"
   },
   "devDependencies": {
+    "eslint": "^7.10.0",
     "husky": "^4.3.0",
     "jest": "^26.5.2"
   }
