@@ -11,45 +11,39 @@ test('prefer entryPoints option to src file', done => {
 		outdir: './',
 		entryPoints: [
 			resolve('a.js'),
-			resolve('b.js')
-		]
+			resolve('b.js'),
+		],
 	})
 
 	execute(stream, [
-`console.log("a.js");
-`
-	,
-`console.log("b.js");
-`
+		'console.log("a.js");\n',
+		'console.log("b.js");\n',
 	]).then(done, done)
 
 	stream.write(new File({
 		path: resolve('a.js'),
-		contents: Buffer.from('')
+		contents: Buffer.from(''),
 	}))
 	stream.end()
 })
 
 test('entry files number === output files number', done => {
 	const stream = gulpEsbuild({
-		outdir: './'
+		outdir: './',
 	})
 
 	execute(stream, [
-`console.log("a.js");
-`
-	,
-`console.log("b.js");
-`
+		'console.log("a.js");\n',
+		'console.log("b.js");\n',
 	]).then(done, done)
 
 	stream.write(new File({
 		path: resolve('a.js'),
-		contents: Buffer.from('')
+		contents: Buffer.from(''),
 	}))
 	stream.write(new File({
 		path: resolve('b.js'),
-		contents: Buffer.from('')
+		contents: Buffer.from(''),
 	}))
 	stream.end()
 })
@@ -57,7 +51,7 @@ test('entry files number === output files number', done => {
 test('bundle works', done => {
 	const stream = gulpEsbuild({
 		outfile: 'bundle.js',
-		bundle: true
+		bundle: true,
 	})
 
 	execute(stream, [
@@ -68,12 +62,12 @@ test('bundle works', done => {
   // test/fixtures/b.js
   console.log("b.js");
 })();
-`
+`,
 	]).then(done, done)
 
 	stream.write(new File({
 		path: resolve('c.js'),
-		contents: Buffer.from('')
+		contents: Buffer.from(''),
 	}))
 	stream.end()
 })

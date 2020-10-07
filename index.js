@@ -27,7 +27,7 @@ module.exports = function(options = {}) {
 			const params = {
 				...options,
 				entryPoints: entry,
-				write: false
+				write: false,
 			}
 			let data
 
@@ -41,14 +41,14 @@ module.exports = function(options = {}) {
 
 			outputFiles.forEach(it => {
 				const file = new Vinyl({
-					path:     it.path,
-					contents: Buffer.from(it.contents)
+					path: it.path,
+					contents: Buffer.from(it.contents),
 				})
 
 				this.push(file)
 			})
 
 			cb(null)
-		}
+		},
 	})
 }
