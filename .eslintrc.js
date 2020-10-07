@@ -10,10 +10,6 @@ module.exports = {
 		es2021: true,
 		jest: true,
 	},
-	ignorePatterns: [
-		'node_modules',
-		'examples',
-	],
 	rules: {
 		// disallow __proto__
 		'no-proto': 'error',
