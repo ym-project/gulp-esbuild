@@ -48,6 +48,8 @@ exports.build = build
 npm run build
 ```
 
+More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/examples)
+
 ## Plugin arguments
 
 You can find all available options in the typescript declaration file in the official repository [https://github.com/evanw/esbuild/blob/master/lib/types.ts](https://github.com/evanw/esbuild/blob/master/lib/types.ts).
