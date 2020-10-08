@@ -1,8 +1,5 @@
 <a href="https://npmcharts.com/compare/gulp-esbuild?minimal=true">
-    <img src="https://img.shields.io/npm/dm/gulp-esbuild.svg" alt="downloads per month" />
-</a>
-<a href="https://packagephobia.com/result?p=gulp-esbuild">
-    <img src="https://badgen.net/packagephobia/install/gulp-esbuild" alt="install size" />
+    <img alt="downloads per month" src="https://img.shields.io/npm/dm/gulp-esbuild?style=for-the-badge">
 </a>
 
 # gulp-esbuild
