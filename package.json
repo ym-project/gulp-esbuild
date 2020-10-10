@@ -18,6 +18,10 @@
   "bugs": "https://github.com/ym-project/gulp-esbuild/issues",
   "license": "MIT",
   "main": "index.js",
+  "exports": {
+    "import": "./index.mjs",
+    "require": "./index.js"
+  },
   "types": "index.d.ts",
   "engines": {
     "node": ">=8.6.0"
