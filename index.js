@@ -1,5 +1,5 @@
-const { Transform } = require('stream')
-const { build } = require('esbuild')
+const {Transform} = require('stream')
+const {build} = require('esbuild')
 const PluginError = require('plugin-error')
 const Vinyl = require('vinyl')
 
@@ -37,7 +37,7 @@ module.exports = function(options = {}) {
 				return cb(new PluginError(PLUGIN_NAME, err))
 			}
 
-			const { outputFiles } = data
+			const {outputFiles} = data
 
 			outputFiles.forEach(it => {
 				const file = new Vinyl({
