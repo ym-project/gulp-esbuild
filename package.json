@@ -23,7 +23,7 @@
   },
   "scripts": {
     "test": "jest",
-    "lint": "eslint './**/*.js'"
+    "lint": "eslint '**/*.js'"
   },
   "dependencies": {
     "esbuild": "^0.7.14",
