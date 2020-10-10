@@ -49,8 +49,4 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 
 ## Plugin arguments
 
-You can find all available options in the typescript declaration file in the official repository [https://github.com/evanw/esbuild/blob/master/lib/types.ts](https://github.com/evanw/esbuild/blob/master/lib/types.ts).
-
-Pay attention to such interfaces as `CommonOptions` and `BuildOptions`.
-
-Other interfaces aren't used in this plugin.
+You can find all available options in the typescript declaration file [https://github.com/ym-project/gulp-esbuild/blob/master/index.d.ts](https://github.com/ym-project/gulp-esbuild/blob/master/index.d.ts).
