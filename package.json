@@ -1,6 +1,6 @@
 {
   "name": "gulp-esbuild",
-  "version": "0.1.24",
+  "version": "0.1.25",
   "description": "gulp plugin for esbuild bundler",
   "keywords": [
     "gulpplugin"
@@ -26,12 +26,12 @@
     "lint": "eslint './**/*.js'"
   },
   "dependencies": {
-    "esbuild": "^0.7.13",
+    "esbuild": "^0.7.14",
     "plugin-error": "^1.0.1",
     "vinyl": "^2.2.1"
   },
   "devDependencies": {
-    "eslint": "^7.10.0",
+    "eslint": "^7.11.0",
     "husky": "^4.3.0",
     "jest": "^26.5.2"
   }
