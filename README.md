@@ -1,6 +1,4 @@
-<a href="https://npmcharts.com/compare/gulp-esbuild?minimal=true">
-    <img alt="downloads per month" src="https://img.shields.io/npm/dm/gulp-esbuild?style=for-the-badge">
-</a>
+[![downloads per month](https://img.shields.io/npm/dm/gulp-esbuild?style=flat-square)](https://npmcharts.com/compare/gulp-esbuild?minimal=true)
 
 # gulp-esbuild
 
