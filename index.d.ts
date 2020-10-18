@@ -49,6 +49,8 @@ interface BuildOptions extends CommonOptions {
 	outExtension?: {
 		[ext: string]: string
 	}
+	publicPath?: string
+	inject?: string[]
 	entryPoints?: string[]
 }
 
