@@ -26,6 +26,7 @@ interface CommonOptions {
 		[key: string]: string
 	}
 	pure?: string[]
+	avoidTDZ?: boolean
 
 	color?: boolean
 	logLevel?: LogLevel
