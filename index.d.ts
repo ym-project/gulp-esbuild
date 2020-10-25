@@ -7,6 +7,7 @@ type Strict = 'nullish-coalescing' | 'optional-chaining' | 'class-fields'
 type LogLevel = 'info' | 'warning' | 'error' | 'silent'
 type Platform = 'browser' | 'node'
 type Loader = 'js' | 'jsx' | 'ts' | 'tsx' | 'css' | 'json' | 'text' | 'base64' | 'file' | 'dataurl' | 'binary'
+type Charset = 'ascii' | 'utf8'
 
 interface CommonOptions {
 	sourcemap?: boolean | 'inline' | 'external'
@@ -19,6 +20,7 @@ interface CommonOptions {
 	minifyWhitespace?: boolean
 	minifyIdentifiers?: boolean
 	minifySyntax?: boolean
+	charset?: Charset
 
 	jsxFactory?: string
 	jsxFragment?: string
