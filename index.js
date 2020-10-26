@@ -2,11 +2,10 @@ const {Transform} = require('stream')
 const {build} = require('esbuild')
 const PluginError = require('plugin-error')
 const Vinyl = require('vinyl')
-
-const PLUGIN_NAME = 'gulp-esbuild'
+const {name: PLUGIN_NAME} = require('./package.json')
 
 module.exports = function(options = {}) {
-	const entries = []
+	const entryPoints = []
 
 	return new Transform({
 		objectMode: true,
@@ -15,37 +14,28 @@ module.exports = function(options = {}) {
 				return cb(new PluginError(PLUGIN_NAME, new TypeError('file should be a buffer')))
 			}
 
-			if (!options.entryPoints) {
-				const path = file.history[file.history.length - 1]
-				entries.push(path)
-			}
-
+			entryPoints.push(file.path)
 			cb(null)
 		},
 		async flush(cb) {
-			const entry = options.entryPoints || entries
 			const params = {
 				...options,
-				entryPoints: entry,
+				entryPoints,
 				write: false,
 			}
-			let data
+			let outputFiles
 
 			try {
-				data = await build(params)
+				({outputFiles} = await build(params))
 			} catch(err) {
 				return cb(new PluginError(PLUGIN_NAME, err))
 			}
 
-			const {outputFiles} = data
-
-			outputFiles.forEach(it => {
-				const file = new Vinyl({
-					path: it.path,
-					contents: Buffer.from(it.contents),
-				})
-
-				this.push(file)
+			outputFiles.forEach(file => {
+				this.push(new Vinyl({
+					path: file.path,
+					contents: Buffer.from(file.contents),
+				}))
 			})
 
 			cb(null)
