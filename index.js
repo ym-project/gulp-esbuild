@@ -24,6 +24,12 @@ module.exports = function(options = {}) {
 				entryPoints,
 				write: false,
 			}
+
+			// set outdir by default
+			if (!options.outdir && !options.outfile) {
+				params.outdir = '.'
+			}
+
 			let outputFiles
 
 			try {
