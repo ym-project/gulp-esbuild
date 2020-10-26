@@ -19,6 +19,7 @@ module.exports = function(options = {}) {
 		},
 		async flush(cb) {
 			const params = {
+				logLevel: 'silent',
 				...options,
 				entryPoints,
 				write: false,
