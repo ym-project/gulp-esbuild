@@ -6,27 +6,6 @@ const path = require('path')
 ** TESTS
 */
 
-test('prefer entryPoints option to src file', done => {
-	const stream = gulpEsbuild({
-		outdir: './',
-		entryPoints: [
-			resolve('a.js'),
-			resolve('b.js'),
-		],
-	})
-
-	execute(stream, [
-		'console.log("a.js");\n',
-		'console.log("b.js");\n',
-	]).then(done, done)
-
-	stream.write(new File({
-		path: resolve('a.js'),
-		contents: Buffer.from(''),
-	}))
-	stream.end()
-})
-
 test('entry files number === output files number', done => {
 	const stream = gulpEsbuild({
 		outdir: './',
