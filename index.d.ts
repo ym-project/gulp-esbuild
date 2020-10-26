@@ -54,7 +54,6 @@ interface BuildOptions extends CommonOptions {
 	}
 	publicPath?: string
 	inject?: string[]
-	entryPoints?: string[]
 }
 
 export = (options: BuildOptions) => stream.Transform
