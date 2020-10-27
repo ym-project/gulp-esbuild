@@ -1,20 +1,95 @@
 const gulpEsbuild = require('..')
 const File = require('vinyl')
 const path = require('path')
+const {Readable} = require('stream')
 
 /*
 ** TESTS
 */
 
-test('entry files number === output files number', done => {
-	const stream = gulpEsbuild({
-		outdir: './',
+it('should be thrown when the input does not exist', done => {
+	const stream = gulpEsbuild()
+	wrap(stream).catch(err => {
+		expect(err.message).toMatch('Could not read from file')
+		done()
 	})
 
-	execute(stream, [
-		'console.log("a.js");\n',
-		'console.log("b.js");\n',
-	]).then(done, done)
+	stream.write(new File({
+		path: resolve('not-existed.js'),
+		contents: Buffer.from(''),
+	}))
+	stream.end()
+})
+
+it('should be thrown when given null files', done => {
+	const stream = gulpEsbuild()
+	wrap(stream).catch(err => {
+		expect(err.message).toMatch('file should be a buffer')
+		done()
+	})
+
+	stream.write(new File({
+		path: resolve('a.js'),
+	}))
+	stream.end()
+})
+
+it('should be thrown when given streamed files', done => {
+	const stream = gulpEsbuild()
+	wrap(stream).catch(err => {
+		expect(err.message).toMatch('file should be a buffer')
+		done()
+	})
+
+	stream.write(new File({
+		path: resolve('a.js'),
+		contents: new Readable(),
+	}))
+	stream.end()
+})
+
+it('outdir should override default outdir', done => {
+	const stream = gulpEsbuild({
+		outdir: './subfolder',
+	})
+	wrap(stream).then(files => {
+		files.forEach(file => {
+			expect(file.path).toMatch('/subfolder/')
+		})
+		done()
+	})
+
+	stream.write(new File({
+		path: resolve('a.js'),
+		contents: Buffer.from(''),
+	}))
+	stream.end()
+})
+
+it('outfile should override default outdir', done => {
+	const stream = gulpEsbuild({
+		outfile: 'bundle.js',
+	})
+	// outfile and outdir can not be used together
+	// so if there is no an error it's ok
+	wrap(stream).then(() => {
+		done()
+	})
+
+	stream.write(new File({
+		path: resolve('a.js'),
+		contents: Buffer.from(''),
+	}))
+	stream.end()
+})
+
+test('entry files number should be equaled output files number', done => {
+	const stream = gulpEsbuild()
+
+	wrap(stream).then(files => {
+		expect(files.length).toBe(2)
+		done()
+	})
 
 	stream.write(new File({
 		path: resolve('a.js'),
@@ -24,16 +99,18 @@ test('entry files number === output files number', done => {
 		path: resolve('b.js'),
 		contents: Buffer.from(''),
 	}))
+
 	stream.end()
 })
 
-test('bundle works', done => {
+test('files should be bundled', () => {
 	const stream = gulpEsbuild({
 		outfile: 'bundle.js',
 		bundle: true,
 	})
-
-	execute(stream, [
+	wrap(stream).then(files => {
+		const file = files[0]
+		expect(file.contents.toString()).toBe(
 `(() => {
   // test/fixtures/a.js
   console.log("a.js");
@@ -41,8 +118,9 @@ test('bundle works', done => {
   // test/fixtures/b.js
   console.log("b.js");
 })();
-`,
-	]).then(done, done)
+`
+		)
+	})
 
 	stream.write(new File({
 		path: resolve('c.js'),
@@ -71,39 +149,5 @@ function wrap(stream) {
 		stream.on('data', chunk => {
 			data.push(chunk)
 		})
-	})
-}
-
-function execute(stream, expected) {
-	return executeAll(stream, Array.isArray(expected) ? expected : [ expected ])
-}
-
-function executeAll(stream, expected) {
-	return wrap(stream).then(files => {
-		const keys = Object.keys(expected)
-
-		// if length of array "expected" === 1 check number of output files
-		if (keys.length === 1) {
-			if (files.length !== 1) {
-				throw new Error(`expected 1 file, not ${ files.length }`)
-			}
-		}
-
-		// else check to number of array keys === number of output files
-		else if (keys.length !== files.length) {
-			throw new Error(`expected ${ keys.length } files, not ${ files.length }`)
-		}
-
-		let index = 0
-
-		for (const file of files) {
-			const expectedItem = expected[index]
-			const fileContents = file.contents.toString()
-
-			expect(fileContents).toBe(expectedItem)
-			index++
-		}
-
-		return Promise.resolve()
 	})
 }
