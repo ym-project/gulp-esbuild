@@ -3,7 +3,6 @@
 import * as stream from 'stream'
 
 type Format = 'iife' | 'cjs' | 'esm'
-type Strict = 'nullish-coalescing' | 'optional-chaining' | 'class-fields'
 type LogLevel = 'info' | 'warning' | 'error' | 'silent'
 type Platform = 'browser' | 'node'
 type Loader = 'js' | 'jsx' | 'ts' | 'tsx' | 'css' | 'json' | 'text' | 'base64' | 'file' | 'dataurl' | 'binary'
@@ -14,7 +13,6 @@ interface CommonOptions {
 	format?: Format
 	globalName?: string
 	target?: string | string[]
-	strict?: boolean | Strict[]
 
 	minify?: boolean
 	minifyWhitespace?: boolean
