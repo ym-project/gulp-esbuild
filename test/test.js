@@ -83,7 +83,7 @@ it('outfile should override default outdir', done => {
 	stream.end()
 })
 
-test('entry files number should be equaled output files number', done => {
+it('entry files number should be equaled output files number', done => {
 	const stream = gulpEsbuild()
 
 	wrap(stream).then(files => {
@@ -103,7 +103,7 @@ test('entry files number should be equaled output files number', done => {
 	stream.end()
 })
 
-test('files should be bundled', () => {
+it('files should be bundled', () => {
 	const stream = gulpEsbuild({
 		outfile: 'bundle.js',
 		bundle: true,
