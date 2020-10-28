@@ -103,7 +103,7 @@ it('entry files number should be equaled output files number', done => {
 	stream.end()
 })
 
-it('files should be bundled', () => {
+it('files should be bundled', done => {
 	const stream = gulpEsbuild({
 		outfile: 'bundle.js',
 		bundle: true,
@@ -120,6 +120,7 @@ it('files should be bundled', () => {
 })();
 `
 		)
+		done()
 	})
 
 	stream.write(new File({
