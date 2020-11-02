@@ -39,7 +39,9 @@ export default function(options = {}) {
 			try {
 				({outputFiles} = await build(params))
 			} catch(err) {
-				return cb(new PluginError(PLUGIN_NAME, err))
+				return cb(new PluginError(PLUGIN_NAME, err, {
+					showProperties: false,
+				}))
 			}
 
 			outputFiles.forEach(file => {
