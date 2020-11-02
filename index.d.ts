@@ -53,7 +53,7 @@ interface BuildOptions extends CommonOptions {
 	}
 	publicPath?: string
 	inject?: string[]
-	plugins: Plugin[]
+	plugins?: Plugin[]
 }
 
 interface Plugin {
