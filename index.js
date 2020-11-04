@@ -5,7 +5,7 @@ const Vinyl = require('vinyl')
 const {name: PLUGIN_NAME} = require('./package.json')
 
 module.exports = function(options = {}) {
-	const entryPoints = []
+	const entries = []
 
 	return new Transform({
 		objectMode: true,
@@ -14,38 +14,45 @@ module.exports = function(options = {}) {
 				return cb(new PluginError(PLUGIN_NAME, new TypeError('file should be a buffer')))
 			}
 
-			entryPoints.push(file.path)
+			entries.push(file)
 			cb(null)
 		},
 		async flush(cb) {
-			const params = {
+			const commonParams = {
 				logLevel: 'silent',
 				...options,
-				entryPoints,
 				write: false,
 			}
 
-			// set outdir by default
-			if (!options.outdir && !options.outfile) {
-				params.outdir = '.'
+			for (const entry of entries) {
+				const baseName = entry.stem
+				const params = {
+					...commonParams,
+					stdin: {
+						contents: entry.contents.toString(),
+						resolveDir: entry.dirname,
+						loader: entry.extname.slice(1),
+						sourcefile: entry.path,
+					},
+				}
+
+				let outputFiles
+
+				try {
+					({outputFiles} = await build(params))
+				} catch(err) {
+					return cb(new PluginError(PLUGIN_NAME, err, {
+						showProperties: false,
+					}))
+				}
+
+				outputFiles.forEach(file => {
+					this.push(new Vinyl({
+						path: file.path.replace('stdin', baseName),
+						contents: Buffer.from(file.contents),
+					}))
+				})
 			}
-
-			let outputFiles
-
-			try {
-				({outputFiles} = await build(params))
-			} catch(err) {
-				return cb(new PluginError(PLUGIN_NAME, err, {
-					showProperties: false,
-				}))
-			}
-
-			outputFiles.forEach(file => {
-				this.push(new Vinyl({
-					path: file.path,
-					contents: Buffer.from(file.contents),
-				}))
-			})
 
 			cb(null)
 		},
