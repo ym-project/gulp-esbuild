@@ -7,6 +7,7 @@ type LogLevel = 'info' | 'warning' | 'error' | 'silent'
 type Platform = 'browser' | 'node'
 type Loader = 'js' | 'jsx' | 'ts' | 'tsx' | 'css' | 'json' | 'text' | 'base64' | 'file' | 'dataurl' | 'binary' | 'default'
 type Charset = 'ascii' | 'utf8'
+type TreeShaking = true | 'ignore-annotations'
 
 interface CommonOptions {
 	sourcemap?: boolean | 'inline' | 'external'
@@ -19,6 +20,7 @@ interface CommonOptions {
 	minifyIdentifiers?: boolean
 	minifySyntax?: boolean
 	charset?: Charset
+	treeShaking?: TreeShaking
 
 	jsxFactory?: string
 	jsxFragment?: string
