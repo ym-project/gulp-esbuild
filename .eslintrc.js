@@ -52,5 +52,23 @@ module.exports = {
 		],
 		// disallow if, for, ... without brackets
 		'curly': 'error',
+		// disallow empty block like if (...) {}. Allow only empty catch {}
+		'no-empty': [
+			'error',
+			{
+				allowEmptyCatch: true,
+			},
+		],
+		// allow tabs
+		'indent': [
+			'error',
+			'tab',
+		],
+		// disallow spaces between import {a} from ''
+		// const {a} = obj and others
+		'object-curly-spacing': [
+			'error',
+			'never',
+		],
 	},
 }
