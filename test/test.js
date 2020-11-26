@@ -110,6 +110,7 @@ it('files should be bundled', done => {
 	})
 	wrap(stream).then(files => {
 		const file = files[0]
+		/* eslint-disable indent */
 		expect(file.contents.toString()).toBe(
 `(() => {
   // test/fixtures/a.js
