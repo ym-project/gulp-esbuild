@@ -6,5 +6,11 @@ type Options = Omit<
 	'write' | 'incremental' | 'entryPoints' | 'stdin'
 >
 
-declare const gulpEsbuild: (options: Options) => Transform
+type GulpEsbuild = (options: Options) => Transform
+type CreateGulpEsbuild = () => GulpEsbuild
+
+declare const gulpEsbuild: GulpEsbuild & {
+	createGulpEsbuild: CreateGulpEsbuild
+}
+
 export = gulpEsbuild
