@@ -5,8 +5,8 @@ gulp plugin for [esbuild](https://github.com/evanw/esbuild) bundler
 
 
 Plugin has 2 cases: `const gulpEsbuild = require('gulp-esbuild')` and `const {createGulpEsbuild} = require('gulp-esbuild')`.
-* `gulpEsbuild` - is the basic export which you should use usually. 
-* `createGulpEsbuild` - is the export which need only in watch mode. It support [esbuild incremental build](https://esbuild.github.io/api/#incremental) to rebuild the project faster than initial build. Use it with gulp watch mode only.
+* `gulpEsbuild` - is the basic export which you should use usually.
+* `createGulpEsbuild` - is the export which need only in watch mode. It supports [esbuild incremental build](https://esbuild.github.io/api/#incremental) to rebuild the project faster than initial build. Use it with gulp watch mode only.
 
 ## Install
 ```bash
