@@ -1,8 +1,12 @@
 [![downloads per month](https://img.shields.io/npm/dm/gulp-esbuild?style=flat-square)](https://npmcharts.com/compare/gulp-esbuild?minimal=true)
 
 # gulp-esbuild
-
 gulp plugin for [esbuild](https://github.com/evanw/esbuild) bundler
+
+
+Plugin has 2 cases: `const gulpEsbuild = require('gulp-esbuild')` and `const {createGulpEsbuild} = require('gulp-esbuild')`.
+* `gulpEsbuild` - is the basic export which you should use usually. 
+* `createGulpEsbuild` - is the export which need only in watch mode. It support [esbuild incremental build](https://esbuild.github.io/api/#incremental) to rebuild the project faster than initial build. Use it with gulp watch mode only.
 
 ## Install
 ```bash
@@ -48,7 +52,7 @@ exports.build = build
 npm run build
 ```
 
-### watch mode example (esbuild [incremental build](https://esbuild.github.io/api/#incremental))
+### watch mode example
 
 `gulpfile.js`
 ```js
