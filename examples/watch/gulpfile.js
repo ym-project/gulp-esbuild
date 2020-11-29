@@ -3,14 +3,12 @@ const {
 	dest,
 	watch,
 } = require('gulp')
-const {createGulpEsbuild} = require('../..')
+const {createGulpEsbuild} = require('gulp-esbuild')
 const gulpEsbuild = createGulpEsbuild()
 
 function build() {
 	return src('src/*')
-		.pipe(gulpEsbuild({
-			outdir: '.',
-		}))
+		.pipe(gulpEsbuild())
 		.pipe(dest('dist'))
 }
 
