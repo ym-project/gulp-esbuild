@@ -15,7 +15,10 @@ npm install gulp-esbuild
 
 `gulpfile.js`
 ```js
-const { src, dest } = require('gulp')
+const {
+    src,
+    dest,
+} = require('gulp')
 const gulpEsbuild = require('gulp-esbuild')
 
 function build() {
@@ -24,8 +27,8 @@ function build() {
             outfile: 'bundle.js',
             bundle: true,
             loader: {
-                '.tsx': 'tsx'
-            }
+                '.tsx': 'tsx',
+            },
         }))
         .pipe(dest('./dist'))
 }
