@@ -9,7 +9,9 @@ gulp plugin for [esbuild](https://github.com/evanw/esbuild) bundler
 npm install gulp-esbuild
 ```
 
-## Example
+## Examples
+
+### build example
 
 `gulpfile.js`
 ```js
@@ -41,6 +43,46 @@ exports.build = build
 `command line`
 ```bash
 npm run build
+```
+
+### watch mode example (esbuild [incremental build](https://esbuild.github.io/api/#incremental))
+
+`gulpfile.js`
+```js
+const {
+    src,
+    dest,
+    watch,
+} = require('gulp')
+const {createGulpEsbuild} = require('gulp-esbuild')
+const gulpEsbuild = createGulpEsbuild()
+
+function build() {
+    return src('./src/index.js')
+        .pipe(gulpEsbuild({
+            outfile: 'outfile.js',
+            bundle: true,
+        }))
+        .pipe(dist('./dist'))
+}
+
+function watchTask() {
+    watch('./src/index.js', build)
+}
+
+exports.watch = watchTask
+```
+`package.json`
+```json
+...
+"scripts": {
+    "watch": "gulp watch"
+}
+...
+```
+`command line`
+```bash
+npm run watch
 ```
 
 More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/examples)
