@@ -99,6 +99,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | **Name**                                                               | **Type**                               | **Default** |
 | :--------------------------------------------------------------------- | :------------------------------------: | :---------: |
 | [sourcemap](https://esbuild.github.io/api/#sourcemap)                  | `boolean\|'inline'\|'external'`        |             |
+| [sourcesContent](https://github.com/evanw/esbuild/releases/tag/v0.8.27)| `boolean`                              |             |
 | [format](https://esbuild.github.io/api/#format)                        | `'iife'\|'cjs'\|'esm'`                 |             |
 | [globalName](https://esbuild.github.io/api/#global-name)               | `string`                               |             |
 | [target](https://esbuild.github.io/api/#target)                        | `string`                               |             |
