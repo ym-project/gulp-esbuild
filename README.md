@@ -70,7 +70,7 @@ function build() {
             outfile: 'outfile.js',
             bundle: true,
         }))
-        .pipe(dist('./dist'))
+        .pipe(dest('./dist'))
 }
 
 function watchTask() {
