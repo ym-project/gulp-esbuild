@@ -126,7 +126,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [metafile](https://esbuild.github.io/api/#metafile)                    | `string`                                |             |
 | [outdir](https://esbuild.github.io/api/#outdir)                        | `string`                                |             |
 | [outbase](https://esbuild.github.io/api/#outbase)                      | `string`                                |             |
-| [platform](https://esbuild.github.io/api/#platform)                    | `'browser'\|'node'`                     |             |
+| [platform](https://esbuild.github.io/api/#platform)                    | `'browser'\|'node'\|'neutral'`          |             |
 | [external](https://esbuild.github.io/api/#external)                    | `array`                                 |             |
 | [loader](https://esbuild.github.io/api/#loader)                        | `object`                                |             |
 | [resolveExtensions](https://esbuild.github.io/api/#resolve-extensions) | `array`                                 |             |
