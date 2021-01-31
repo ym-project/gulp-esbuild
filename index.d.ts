@@ -3,7 +3,7 @@ import {BuildOptions} from 'esbuild'
 
 type Options = Omit<
 	BuildOptions,
-	'write' | 'incremental' | 'entryPoints' | 'stdin'
+	'write' | 'incremental' | 'entryPoints' | 'stdin' | 'watch'
 >
 
 type GulpEsbuild = (options: Options) => Transform
