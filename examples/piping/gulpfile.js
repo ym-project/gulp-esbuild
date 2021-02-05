@@ -2,7 +2,7 @@ const {
 	src,
 	dest,
 } = require('gulp')
-const {stdinGulpEsbuild} = require('gulp-esbuild')
+const {pipedGulpEsbuild} = require('gulp-esbuild')
 const ts = require('gulp-typescript')
 const alias = require('gulp-ts-alias').default
 
@@ -15,7 +15,7 @@ function build() {
 			// @ts-ignore
 			.pipe(alias({ configuration: tsProject.config }))
 			.pipe(
-				stdinGulpEsbuild({
+				pipedGulpEsbuild({
 					platform: 'node',
 				}),
 			)
