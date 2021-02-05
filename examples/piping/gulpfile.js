@@ -2,7 +2,7 @@ const {
 	src,
 	dest,
 } = require('gulp')
-const {stdinGulpEsbuild} = require('../..')
+const {stdinGulpEsbuild} = require('gulp-esbuild')
 const ts = require('gulp-typescript')
 const alias = require('gulp-ts-alias').default
 
