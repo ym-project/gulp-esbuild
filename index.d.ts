@@ -8,9 +8,11 @@ type Options = Omit<
 
 type GulpEsbuild = (options: Options) => Transform
 type CreateGulpEsbuild = () => GulpEsbuild
+type PipedGulpEsbuild = GulpEsbuild
 
 declare const gulpEsbuild: GulpEsbuild & {
 	createGulpEsbuild: CreateGulpEsbuild
+	pipedGulpEsbuild: PipedGulpEsbuild
 }
 
 export = gulpEsbuild
