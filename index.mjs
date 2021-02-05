@@ -9,7 +9,7 @@ const {name: PLUGIN_NAME} = require('./package.json')
 const {build} = esbuild
 
 export default function(options = {}) {
-	const entries = []
+	const entryPoints = []
 
 	return new Transform({
 		objectMode: true,
@@ -18,45 +18,38 @@ export default function(options = {}) {
 				return cb(new PluginError(PLUGIN_NAME, new TypeError('file should be a buffer')))
 			}
 
-			entries.push(file)
+			entryPoints.push(file.path)
 			cb(null)
 		},
 		async flush(cb) {
-			const commonParams = {
+			const params = {
 				logLevel: 'silent',
 				...options,
+				entryPoints,
 				write: false,
 			}
 
-			for (const entry of entries) {
-				const baseName = entry.stem
-				const params = {
-					...commonParams,
-					stdin: {
-						contents: entry.contents.toString(),
-						resolveDir: entry.dirname,
-						loader: entry.extname.slice(1),
-						sourcefile: entry.path,
-					},
-				}
-
-				let outputFiles
-
-				try {
-					({outputFiles} = await build(params))
-				} catch(err) {
-					return cb(new PluginError(PLUGIN_NAME, err, {
-						showProperties: false,
-					}))
-				}
-
-				outputFiles.forEach(file => {
-					this.push(new Vinyl({
-						path: file.path.replace('stdin', baseName),
-						contents: Buffer.from(file.contents),
-					}))
-				})
+			// set outdir by default
+			if (!options.outdir && !options.outfile) {
+				params.outdir = '.'
 			}
+
+			let outputFiles
+
+			try {
+				({outputFiles} = await build(params))
+			} catch(err) {
+				return cb(new PluginError(PLUGIN_NAME, err, {
+					showProperties: false,
+				}))
+			}
+
+			outputFiles.forEach(file => {
+				this.push(new Vinyl({
+					path: file.path,
+					contents: Buffer.from(file.contents),
+				}))
+			})
 
 			cb(null)
 		},
@@ -119,4 +112,65 @@ export function createGulpEsbuild() {
 			},
 		})
 	}
+}
+
+export function pipedGulpEsbuild(options = {}) {
+	const entries = []
+
+	return new Transform({
+		objectMode: true,
+		transform(file, _, cb) {
+			if (!file.isBuffer()) {
+				return cb(new PluginError(PLUGIN_NAME, new TypeError('file should be a buffer')))
+			}
+
+			entries.push(file)
+			cb(null)
+		},
+		async flush(cb) {
+			const commonParams = {
+				logLevel: 'silent',
+				...options,
+				write: false,
+			}
+
+			if (!options.outdir && !options.outfile) {
+				commonParams.outdir = '.'
+			}
+
+			for (const entry of entries) {
+				const baseName = entry.stem
+				const params = {
+					...commonParams,
+					stdin: {
+						contents: entry.contents.toString(),
+						resolveDir: entry.dirname,
+						loader: entry.extname.slice(1),
+						sourcefile: entry.path,
+					},
+				}
+
+				let outputFiles
+
+				try {
+					({outputFiles} = await build(params))
+				} catch(err) {
+					return cb(new PluginError(PLUGIN_NAME, err, {
+						showProperties: false,
+					}))
+				}
+
+				outputFiles.forEach(file => {
+					const path = file.path === '<stdout>' ? `${baseName}.js` : file.path
+
+					this.push(new Vinyl({
+						path,
+						contents: Buffer.from(file.contents),
+					}))
+				})
+			}
+
+			cb(null)
+		},
+	})
 }
