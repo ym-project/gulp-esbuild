@@ -130,17 +130,13 @@ module.exports.pipedGulpEsbuild = function(options = {}) {
 				write: false,
 			}
 
-			if (!options.outdir && !options.outfile) {
-				commonParams.outdir = '.'
-			}
-
 			for (const entry of entries) {
-				const baseName = entry.stem
 				const params = {
 					...commonParams,
+					outfile: entry.relative.replace('ts', 'js'),
 					stdin: {
 						contents: entry.contents.toString(),
-						resolveDir: entry.dirname,
+						resolveDir: process.cwd(),
 						loader: entry.extname.slice(1),
 						sourcefile: entry.path,
 					},
@@ -157,10 +153,8 @@ module.exports.pipedGulpEsbuild = function(options = {}) {
 				}
 
 				outputFiles.forEach(file => {
-					const path = file.path === '<stdout>' ? `${baseName}.js` : file.path
-
 					this.push(new Vinyl({
-						path,
+						path: file.path,
 						contents: Buffer.from(file.contents),
 					}))
 				})
