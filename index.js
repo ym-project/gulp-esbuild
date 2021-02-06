@@ -136,7 +136,7 @@ module.exports.pipedGulpEsbuild = function(options = {}) {
 					outfile: entry.relative.replace('ts', 'js'),
 					stdin: {
 						contents: entry.contents.toString(),
-						resolveDir: process.cwd(),
+						resolveDir: entry.dirname,
 						loader: entry.extname.slice(1),
 						sourcefile: entry.path,
 					},
