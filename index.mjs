@@ -134,14 +134,10 @@ export function pipedGulpEsbuild(options = {}) {
 				write: false,
 			}
 
-			if (!options.outdir && !options.outfile) {
-				commonParams.outdir = '.'
-			}
-
 			for (const entry of entries) {
-				const baseName = entry.stem
 				const params = {
 					...commonParams,
+					outfile: entry.relative.replace(/.(ts|tsx|jsx)$/, '.js'),
 					stdin: {
 						contents: entry.contents.toString(),
 						resolveDir: entry.dirname,
@@ -161,10 +157,8 @@ export function pipedGulpEsbuild(options = {}) {
 				}
 
 				outputFiles.forEach(file => {
-					const path = file.path === '<stdout>' ? `${baseName}.js` : file.path
-
 					this.push(new Vinyl({
-						path,
+						path: file.path,
 						contents: Buffer.from(file.contents),
 					}))
 				})
