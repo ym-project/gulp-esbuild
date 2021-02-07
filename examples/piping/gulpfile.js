@@ -10,15 +10,13 @@ const tsProject = ts.createProject('./tsconfig.json')
 
 function build() {
 	return (
-		tsProject
-			.src()
-			// @ts-ignore
-			.pipe(alias({ configuration: tsProject.config }))
-			.pipe(
-				pipedGulpEsbuild({
-					platform: 'node',
-				}),
-			)
+		tsProject.src()
+			.pipe(alias({
+				configuration: tsProject.config,
+			}))
+			.pipe(pipedGulpEsbuild({
+				platform: 'node',
+			}))
 			.pipe(dest(tsProject.config.compilerOptions.outDir))
 	)
 }
