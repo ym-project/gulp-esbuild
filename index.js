@@ -133,7 +133,7 @@ module.exports.pipedGulpEsbuild = function(options = {}) {
 			for (const entry of entries) {
 				const params = {
 					...commonParams,
-					outfile: entry.relative.replace(/.(ts|tsx|jsx)$/, '.js'),
+					outfile: entry.relative.replace(/\.(ts|tsx|jsx)$/, '.js'),
 					stdin: {
 						contents: entry.contents.toString(),
 						resolveDir: entry.dirname,
