@@ -9,6 +9,9 @@ Plugin has 3 cases: `const gulpEsbuild = require('gulp-esbuild')` and `const {cr
 * `createGulpEsbuild` - is the export which need only in watch mode. It supports [esbuild incremental build](https://esbuild.github.io/api/#incremental) to rebuild the project faster than initial build. Use it with gulp watch mode only.
 * `pipedGulpEsbuild` - is the export which need if you want to pipe data from other plugin to gulp-esbuild. It's experemental feature!
 
+### Notice
+This plugin doesn't receive data from other plugins via piping by default. If you want to enable this feature you should use `pipedGulpEsbuild` export. See [example](https://github.com/ym-project/gulp-esbuild/tree/master/examples/piping).
+
 ## Install
 ```bash
 npm install gulp-esbuild
