@@ -126,7 +126,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [errorLimit](https://esbuild.github.io/api/#error-limit)               | `number`                                |             |
 | [bundle](https://esbuild.github.io/api/#bundle)                        | `boolean`                               |             |
 | [splitting](https://esbuild.github.io/api/#splitting)                  | `boolean`                               |             |
-| preserveSymlinks                                                       | `boolean`                               |             |
+| [preserveSymlinks](https://esbuild.github.io/api/#preserve-symlinks)   | `boolean`                               |             |
 | [outfile](https://esbuild.github.io/api/#outfile)                      | `string`                                |             |
 | [metafile](https://esbuild.github.io/api/#metafile)                    | `string`                                |             |
 | [outdir](https://esbuild.github.io/api/#outdir)                        | `string`                                |             |
