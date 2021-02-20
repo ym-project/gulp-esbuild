@@ -25,7 +25,7 @@ function createTransformStream(flushFn, entryPoints) {
 		objectMode: true,
 		transform(file, _, cb) {
 			if (!file.isBuffer()) {
-				return cb(createError(new TypeError('file should be a buffer')))
+				return cb(createError(new TypeError('File should be a buffer')))
 			}
 
 			entryPoints.push(file.path)
