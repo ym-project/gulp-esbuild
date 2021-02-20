@@ -15,6 +15,9 @@ module.exports = {
 		jest: true,
 	},
 	rules: {
+		// allow expect without return in promise
+		'jest/valid-expect-in-promise': 'off',
+
 		// disallow __proto__
 		'no-proto': 'error',
 		// disallow return await
