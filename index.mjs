@@ -28,7 +28,7 @@ function createTransformStream(flushFn, entryPoints) {
 				return cb(createError(new TypeError('File should be a buffer')))
 			}
 
-			entryPoints.push(file.path)
+			entryPoints.push(file)
 			cb(null)
 		},
 		flush: flushFn,
@@ -68,7 +68,7 @@ function simpleBuild() {
 			const params = {
 				logLevel: 'silent',
 				...pluginOptions,
-				entryPoints,
+				entryPoints: entryPoints.map(entry => entry.path),
 				write: false,
 			}
 
@@ -109,7 +109,7 @@ function incrementalBuild() {
 			const params = {
 				logLevel: 'silent',
 				...pluginOptions,
-				entryPoints,
+				entryPoints: entryPoints.map(entry => entry.path),
 				write: false,
 				incremental: true,
 			}
