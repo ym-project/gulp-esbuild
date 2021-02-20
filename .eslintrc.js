@@ -2,8 +2,12 @@ module.exports = {
 	parserOptions: {
 		sourceType: 'module',
 	},
+	plugins: [
+		'jest',
+	],
 	extends: [
 		'eslint:recommended',
+		'plugin:jest/recommended',
 	],
 	env: {
 		node: true,
