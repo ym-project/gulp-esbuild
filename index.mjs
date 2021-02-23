@@ -61,7 +61,7 @@ function createGulpEsbuild(createOptions = {}) {
 }
 
 function simpleBuild() {
-	return function(pluginOptions = {}) {
+	return function plugin(pluginOptions = {}) {
 		const entryPoints = []
 
 		async function flushFunction(cb) {
@@ -102,7 +102,7 @@ function simpleBuild() {
 function incrementalBuild() {
 	let promise
 
-	return function(pluginOptions = {}) {
+	return function plugin(pluginOptions = {}) {
 		const entryPoints = []
 
 		async function flushFunction(cb) {
@@ -147,7 +147,7 @@ function incrementalBuild() {
 }
 
 function pipedBuild() {
-	return function(pluginOptions = {}) {
+	return function plugin(pluginOptions = {}) {
 		const entryPoints = []
 
 		async function flushFunction(cb) {
@@ -195,7 +195,7 @@ function pipedBuild() {
 function pipedAndIncrementalBuild() {
 	let promise
 
-	return function(pluginOptions = {}) {
+	return function plugin(pluginOptions = {}) {
 		const entryPoints = []
 
 		async function flushFunction(cb) {
