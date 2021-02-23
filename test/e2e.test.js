@@ -27,7 +27,7 @@ function resolve(filePath) {
 //
 
 // Notice!
-// Esbuild read files from file system by default. We can't to pass contents or non-exist path via Vinyl.
+// Esbuild read files from file system by default. We can't pass contents or non-exist path via Vinyl.
 // So we set real path and empty contents fields.
 // new Vinyl({ path, contents })
 
