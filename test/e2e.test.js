@@ -1,5 +1,5 @@
 const gulpEsbuild = require('..')
-// const {createGulpEsbuild} = require('..')
+const {createGulpEsbuild} = require('..')
 const {Readable} = require('stream')
 const Vinyl = require('vinyl')
 const path = require('path')
@@ -25,6 +25,11 @@ function resolve(filePath) {
 //
 // tests
 //
+
+// Notice!
+// Esbuild read files from file system by default. We can't to pass contents or non-exist path via Vinyl.
+// So we set real path and empty contents fields.
+// new Vinyl({ path, contents })
 
 it('Got non-existent file. It should throw an error.', () => {
 	const stream = gulpEsbuild()
@@ -118,6 +123,35 @@ it('Entry files number should equal output files number', () => {
 	stream.write(new Vinyl({
 		path: resolve('a.js'),
 		contents: Buffer.from(''),
+	}))
+
+	stream.end()
+})
+
+it('Check createGulpEsbuild export. Return function should equals gulpEsbuild function.', () => {
+	const fn = createGulpEsbuild()
+	expect(fn.name).toBe(gulpEsbuild.name)
+})
+
+// Notice!
+// Previously we wrote that we can't to pass contents via Vinyl because esbuild read files from file system.
+// Flag "pipe" changes a behavior. It use esbuild stdin API and esbuild can read files contents via Vinyl.
+// So we can pass any contents and path and it'll be ok.
+
+it('Check pipe flag. Passed contents should pass to plugin.', () => {
+	const fn = createGulpEsbuild({pipe: true})
+	const stream = fn()
+	const content = 'console.log("custom content inside empty-file.js")'
+
+	wrapStream(stream).then(files => {
+		const [file] = files
+		expect(file.contents.toString()).toContain(content)
+	})
+
+	stream.write(new Vinyl({
+		path: resolve('empty-file.js'),
+		contents: Buffer.from(content),
+		base: resolve(''),
 	}))
 
 	stream.end()
