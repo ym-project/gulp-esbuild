@@ -156,3 +156,6 @@ it('Check pipe flag. Passed contents should pass to plugin.', () => {
 
 	stream.end()
 })
+
+it.todo('Check incremental flag.')
+it.todo('Check incremental and pipe flags together.')
