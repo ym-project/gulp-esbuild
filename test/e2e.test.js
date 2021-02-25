@@ -35,7 +35,7 @@ it('Got non-existent file. It should throw an error.', () => {
 	const stream = gulpEsbuild()
 
 	wrapStream(stream).catch(err => {
-		expect(err.message).toMatch('Could not read from file')
+		expect(err.message).toMatch('Could not resolve')
 	})
 
 	stream.write(new Vinyl({
