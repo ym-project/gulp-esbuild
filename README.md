@@ -152,5 +152,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [tsconfig](https://esbuild.github.io/api/#tsconfig)                    | `string`                                |             |
 | [outExtension](https://esbuild.github.io/api/#out-extension)           | `object`                                |             |
 | [publicPath](https://esbuild.github.io/api/#public-path)               | `string`                                |             |
+| chunkNames                                                             | `string`                                |             |
+| assetNames                                                             | `string`                                |             |
 | [inject](https://esbuild.github.io/api/#inject)                        | `array`                                 |             |
 | [plugins](https://esbuild.github.io/plugins/)                          | `array`                                 |             |
