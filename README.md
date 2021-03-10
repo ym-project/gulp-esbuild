@@ -130,18 +130,17 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [jsxFragment](https://esbuild.github.io/api/#jsx-fragment)             | `string`                                |             |
 | [define](https://esbuild.github.io/api/#define)                        | `object`                                |             |
 | [pure](https://esbuild.github.io/api/#pure)                            | `string`                                |             |
-| [avoidTDZ](https://esbuild.github.io/api/#avoid-tdz)                   | `boolean`                               |             |
 | [keepNames](https://esbuild.github.io/api/#keep-names)                 | `boolean`                               |             |
-| [banner](https://esbuild.github.io/api/#banner)                        | `string`                                |             |
-| [footer](https://esbuild.github.io/api/#footer)                        | `string`                                |             |
+| [banner](https://esbuild.github.io/api/#banner)                        | `object`                                |             |
+| [footer](https://esbuild.github.io/api/#footer)                        | `object`                                |             |
 | [color](https://esbuild.github.io/api/#color)                          | `boolean`                               |             |
 | [logLevel](https://esbuild.github.io/api/#log-level)                   | `'info'\|'warning'\|'error'\|'silent'`  | `'silent'`  |
-| [errorLimit](https://esbuild.github.io/api/#error-limit)               | `number`                                |             |
+| [logLimit](https://esbuild.github.io/api/#log-limit)                   | `number`                                |             |
 | [bundle](https://esbuild.github.io/api/#bundle)                        | `boolean`                               |             |
 | [splitting](https://esbuild.github.io/api/#splitting)                  | `boolean`                               |             |
 | [preserveSymlinks](https://esbuild.github.io/api/#preserve-symlinks)   | `boolean`                               |             |
 | [outfile](https://esbuild.github.io/api/#outfile)                      | `string`                                |             |
-| [metafile](https://esbuild.github.io/api/#metafile)                    | `string`                                |             |
+| [metafile](https://esbuild.github.io/api/#metafile)                    | `boolean`                               |             |
 | [outdir](https://esbuild.github.io/api/#outdir)                        | `string`                                |             |
 | [outbase](https://esbuild.github.io/api/#outbase)                      | `string`                                |             |
 | [platform](https://esbuild.github.io/api/#platform)                    | `'browser'\|'node'\|'neutral'`          |             |
@@ -149,6 +148,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [loader](https://esbuild.github.io/api/#loader)                        | `object`                                |             |
 | [resolveExtensions](https://esbuild.github.io/api/#resolve-extensions) | `array`                                 |             |
 | [mainFields](https://esbuild.github.io/api/#main-fields)               | `array`                                 |             |
+| [conditions](https://esbuild.github.io/api/#conditions)                | `array`                                 |             |
 | [tsconfig](https://esbuild.github.io/api/#tsconfig)                    | `string`                                |             |
 | [outExtension](https://esbuild.github.io/api/#out-extension)           | `object`                                |             |
 | [publicPath](https://esbuild.github.io/api/#public-path)               | `string`                                |             |
