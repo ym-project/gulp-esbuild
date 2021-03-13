@@ -4,7 +4,9 @@ import {BuildOptions} from 'esbuild'
 type Options = Omit<
     BuildOptions,
     'write' | 'incremental' | 'entryPoints' | 'stdin' | 'watch'
->
+> & {
+	metafileName: string
+}
 
 interface CreateOptions {
     incremental?: boolean
