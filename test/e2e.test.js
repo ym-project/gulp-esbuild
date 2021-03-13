@@ -159,3 +159,61 @@ it('Check pipe flag. Passed contents should pass to plugin.', () => {
 
 it.todo('Check incremental flag.')
 it.todo('Check incremental and pipe flags together.')
+
+it('Check metafile.', async () => {
+	const stream = gulpEsbuild({
+		metafile: true,
+	})
+
+	wrapStream(stream).then(files => {
+		expect(files.length).toBe(2)
+		expect(files[1].path).toBe('metafile.json')
+	})
+
+	stream.write(new Vinyl({
+		path: resolve('empty-file.js'),
+		contents: Buffer.from(''),
+	}))
+
+	stream.end()
+})
+
+it('Check metafile. Set metafileName.', async () => {
+	const stream = gulpEsbuild({
+		metafile: true,
+		metafileName: 'meta.json',
+	})
+
+	wrapStream(stream).then(files => {
+		expect(files.length).toBe(2)
+		expect(files[1].path).toBe('meta.json')
+	})
+
+	stream.write(new Vinyl({
+		path: resolve('empty-file.js'),
+		contents: Buffer.from(''),
+	}))
+
+	stream.end()
+})
+
+it('Check metafile. With pipe flag.', async () => {
+	const fn = createGulpEsbuild({pipe: true})
+	const stream = fn({
+		metafile: true,
+		metafileName: 'meta.json',
+	})
+
+	wrapStream(stream).then(files => {
+		expect(files.length).toBe(2)
+		expect(files[1].path).toBe('meta.json')
+	})
+
+	stream.write(new Vinyl({
+		path: resolve('empty-file.js'),
+		contents: Buffer.from(''),
+		base: resolve(''),
+	}))
+
+	stream.end()
+})
