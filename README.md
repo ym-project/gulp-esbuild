@@ -141,6 +141,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [preserveSymlinks](https://esbuild.github.io/api/#preserve-symlinks)   | `boolean`                               |             |
 | [outfile](https://esbuild.github.io/api/#outfile)                      | `string`                                |             |
 | [metafile](https://esbuild.github.io/api/#metafile)                    | `boolean`                               |             |
+| metafileName                                                           | `string`                                |             |
 | [outdir](https://esbuild.github.io/api/#outdir)                        | `string`                                |             |
 | [outbase](https://esbuild.github.io/api/#outbase)                      | `string`                                |             |
 | [platform](https://esbuild.github.io/api/#platform)                    | `'browser'\|'node'\|'neutral'`          |             |
