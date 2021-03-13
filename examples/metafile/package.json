@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "scripts": {
+    "build-default-metafile": "gulp build-default-meta",
+    "build-named-metafile": "gulp build-named-meta"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-esbuild": "latest"
+  }
+}
