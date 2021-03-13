@@ -3,6 +3,7 @@ const {build} = require('esbuild')
 const PluginError = require('plugin-error')
 const Vinyl = require('vinyl')
 const {name: PLUGIN_NAME} = require('./package.json')
+const metaFileDefaultName = 'metafile.json'
 
 //
 // helpers
@@ -29,6 +30,28 @@ function createTransformStream(flushFn, entryPoints) {
 		},
 		flush: flushFn,
 	})
+}
+
+function omitPluginSpecialOptions(options) {
+	return omit(options, [
+		'metafileName',
+	])
+}
+
+function omit(object, keys = []) {
+	const obj = {}
+
+	for (const key in object) {
+		const value = object[key]
+
+		if (keys.includes(key)) {
+			continue
+		}
+
+		obj[key] = value
+	}
+
+	return obj
 }
 
 //
@@ -59,34 +82,47 @@ function createGulpEsbuild(createOptions = {}) {
 function simpleBuild() {
 	return function plugin(pluginOptions = {}) {
 		const entryPoints = []
+		const esbuildOptions = omitPluginSpecialOptions(pluginOptions)
+		const specialOptions = {
+			metafileName: pluginOptions.metafileName,
+		}
 
 		async function flushFunction(cb) {
 			const params = {
 				logLevel: 'silent',
-				...pluginOptions,
+				...esbuildOptions,
 				entryPoints: entryPoints.map(entry => entry.path),
 				write: false,
 			}
 
 			// set outdir by default
-			if (!pluginOptions.outdir && !pluginOptions.outfile) {
+			if (!esbuildOptions.outdir && !esbuildOptions.outfile) {
 				params.outdir = '.'
 			}
 
-			let outputFiles
+			let result
 
 			try {
-				({outputFiles} = await build(params))
+				result = await build(params)
 			} catch(err) {
 				return cb(createError(err))
 			}
 
-			outputFiles.forEach(file => {
+			result.outputFiles.forEach(file => {
 				this.push(createFile({
 					path: file.path,
 					contents: Buffer.from(file.contents),
 				}))
 			})
+
+			if (result.metafile) {
+				const name = specialOptions.metafileName || metaFileDefaultName
+
+				this.push(createFile({
+					path: name,
+					contents: Buffer.from(JSON.stringify(result.metafile)),
+				}))
+			}
 
 			cb(null)
 		}
@@ -100,18 +136,22 @@ function incrementalBuild() {
 
 	return function plugin(pluginOptions = {}) {
 		const entryPoints = []
+		const esbuildOptions = omitPluginSpecialOptions(pluginOptions)
+		const specialOptions = {
+			metafileName: pluginOptions.metafileName,
+		}
 
 		async function flushFunction(cb) {
 			const params = {
 				logLevel: 'silent',
-				...pluginOptions,
+				...esbuildOptions,
 				entryPoints: entryPoints.map(entry => entry.path),
 				write: false,
 				incremental: true,
 			}
 
 			// set outdir by default
-			if (!pluginOptions.outdir && !pluginOptions.outfile) {
+			if (!esbuildOptions.outdir && !esbuildOptions.outfile) {
 				params.outdir = '.'
 			}
 
@@ -135,6 +175,15 @@ function incrementalBuild() {
 				}))
 			})
 
+			if (promise.metafile) {
+				const name = specialOptions.metafileName || metaFileDefaultName
+
+				this.push(createFile({
+					path: name,
+					contents: Buffer.from(JSON.stringify(promise.metafile)),
+				}))
+			}
+
 			cb(null)
 		}
 
@@ -145,11 +194,15 @@ function incrementalBuild() {
 function pipedBuild() {
 	return function plugin(pluginOptions = {}) {
 		const entryPoints = []
+		const esbuildOptions = omitPluginSpecialOptions(pluginOptions)
+		const specialOptions = {
+			metafileName: pluginOptions.metafileName,
+		}
 
 		async function flushFunction(cb) {
 			const commonParams = {
 				logLevel: 'silent',
-				...pluginOptions,
+				...esbuildOptions,
 				write: false,
 			}
 
@@ -165,20 +218,30 @@ function pipedBuild() {
 					},
 				}
 
-				let outputFiles
+				let result
 
 				try {
-					({outputFiles} = await build(params))
+					result = await build(params)
 				} catch(err) {
 					return cb(createError(err))
 				}
 
-				outputFiles.forEach(file => {
-					this.push(new Vinyl({
+				result.outputFiles.forEach(file => {
+					this.push(createFile({
 						path: file.path,
 						contents: Buffer.from(file.contents),
 					}))
 				})
+
+				if (result.metafile) {
+					const name = specialOptions.metafileName || metaFileDefaultName
+
+					this.push(createFile({
+						path: name,
+						contents: Buffer.from(JSON.stringify(result.metafile)),
+					}))
+				}
+
 			}
 
 			cb(null)
@@ -193,11 +256,15 @@ function pipedAndIncrementalBuild() {
 
 	return function plugin(pluginOptions = {}) {
 		const entryPoints = []
+		const esbuildOptions = omitPluginSpecialOptions(pluginOptions)
+		const specialOptions = {
+			metafileName: pluginOptions.metafileName,
+		}
 
 		async function flushFunction(cb) {
 			const commonParams = {
 				logLevel: 'silent',
-				...pluginOptions,
+				...esbuildOptions,
 				write: false,
 			}
 
@@ -233,7 +300,14 @@ function pipedAndIncrementalBuild() {
 					}))
 				})
 
-				cb(null)
+				if (promise.metafile) {
+					const name = specialOptions.metafileName || metaFileDefaultName
+
+					this.push(createFile({
+						path: name,
+						contents: Buffer.from(JSON.stringify(promise.metafile)),
+					}))
+				}
 			}
 
 			cb(null)
