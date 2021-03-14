@@ -7,7 +7,7 @@ So if you want to generate metafile you should set `metafile: true`, if you don'
 
 By default generated metafile name is `metafile.json`. If you want to change name you should use `metafileName` option.
 ```js
-gulpEsbuils({
+gulpEsbuild({
 	metafile: true, // generate file
 	metafileName: 'myName.json', // set metafile name
 })
