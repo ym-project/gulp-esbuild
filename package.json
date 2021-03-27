@@ -35,7 +35,7 @@
     "vinyl": "^2.2.1"
   },
   "devDependencies": {
-    "esbuild": "^0.9.7",
+    "esbuild": "^0.10.2",
     "eslint": "^7.22.0",
     "eslint-plugin-jest": "^24.3.2",
     "husky": "^4.3.8",
