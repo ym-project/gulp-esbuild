@@ -134,7 +134,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [banner](https://esbuild.github.io/api/#banner)                        | `object`                                |                   |
 | [footer](https://esbuild.github.io/api/#footer)                        | `object`                                |                   |
 | [color](https://esbuild.github.io/api/#color)                          | `boolean`                               |                   |
-| [logLevel](https://esbuild.github.io/api/#log-level)                   | `'info'\|'warning'\|'error'\|'silent'`  | `'silent'`        |
+| [logLevel](https://esbuild.github.io/api/#log-level)                   | `'debug'\|'info'\|'warning'\|'error'\|'silent'`  | `'silent'`        |
 | [logLimit](https://esbuild.github.io/api/#log-limit)                   | `number`                                |                   |
 | [bundle](https://esbuild.github.io/api/#bundle)                        | `boolean`                               |                   |
 | [splitting](https://esbuild.github.io/api/#splitting)                  | `boolean`                               |                   |
