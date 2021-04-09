@@ -2,22 +2,22 @@ import {Transform} from 'stream'
 import {BuildOptions} from 'esbuild'
 
 type Options = Omit<
-    BuildOptions,
-    'write' | 'incremental' | 'entryPoints' | 'stdin' | 'watch'
+	BuildOptions,
+	'write' | 'incremental' | 'entryPoints' | 'stdin' | 'watch'
 > & {
 	metafileName?: string
 }
 
 interface CreateOptions {
-    incremental?: boolean
-    pipe?: boolean
+	incremental?: boolean
+	pipe?: boolean
 }
 
 type GulpEsbuild = (options: Options) => Transform
 type CreateGulpEsbuild = (options: CreateOptions) => GulpEsbuild
 
 declare const gulpEsbuild: GulpEsbuild & {
-    createGulpEsbuild: CreateGulpEsbuild
+	createGulpEsbuild: CreateGulpEsbuild
 }
 
 export = gulpEsbuild
