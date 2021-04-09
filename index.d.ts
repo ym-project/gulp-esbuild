@@ -5,7 +5,7 @@ type Options = Omit<
     BuildOptions,
     'write' | 'incremental' | 'entryPoints' | 'stdin' | 'watch'
 > & {
-	metafileName: string
+	metafileName?: string
 }
 
 interface CreateOptions {
