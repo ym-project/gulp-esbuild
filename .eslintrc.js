@@ -17,6 +17,8 @@ module.exports = {
 	rules: {
 		// allow expect without return in promise
 		'jest/valid-expect-in-promise': 'off',
+		// allow expect in a promise catch function
+		'jest/no-conditional-expect': 'off',
 
 		// disallow __proto__
 		'no-proto': 'error',
