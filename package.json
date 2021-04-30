@@ -31,7 +31,7 @@
     "lint": "eslint '**/*.{js,mjs}'"
   },
   "dependencies": {
-    "esbuild": "^0.11.14",
+    "esbuild": "^0.11.16",
     "plugin-error": "^1.0.1",
     "vinyl": "^2.2.1"
   },
