@@ -126,7 +126,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [minifySyntax](https://esbuild.github.io/api/#minify)                  | `boolean`                               |                   |
 | [charset](https://esbuild.github.io/api/#charset)                      | `'ascii'\|'utf8'`                       |                   |
 | [treeShaking](https://esbuild.github.io/api/#tree-shaking)             | `true\|'ignore-annotations'`            |                   |
-| jsx                                                                    | `'transform'\|'preserve'`               |                   |
+| [jsx](https://esbuild.github.io/api/#jsx)                              | `'transform'\|'preserve'`               |                   |
 | [jsxFactory](https://esbuild.github.io/api/#jsx-factory)               | `string`                                |                   |
 | [jsxFragment](https://esbuild.github.io/api/#jsx-fragment)             | `string`                                |                   |
 | [define](https://esbuild.github.io/api/#define)                        | `object`                                |                   |
