@@ -1,33 +1,29 @@
 [![downloads per month](https://img.shields.io/npm/dm/gulp-esbuild?style=flat-square)](https://npmcharts.com/compare/gulp-esbuild?minimal=true)
 
 # gulp-esbuild
-gulp plugin for [esbuild](https://github.com/evanw/esbuild) bundler
+A [gulp](https://gulpjs.com) plugin for the [esbuild](https://esbuild.github.io) bundler.
 
-Plugin has 2 cases: `gulpEsbuild` default export and `createGulpEsbuild` named export.
+There are two exports available: `gulpEsbuild` and `createGulpEsbuild`. In most cases you should use the `gulpEsbuild` export. Use the `createGuipEsbuild` export if you want to enable the esbuild's incremental build or piping:
+* the [esbuild's incremental build](https://esbuild.github.io/api/#incremental) is used with the [gulp's watching files API](https://gulpjs.com/docs/en/getting-started/watching-files/) and allows you to rebuild only changed parts of code ([example](https://github.com/ym-project/gulp-esbuild/tree/master/examples/watch));
+* piping allows you to receive data from other plugins via stream piping ([example](https://github.com/ym-project/gulp-esbuild/tree/master/examples/piping)).
 
-In most cases use `gulpEsbuild` default export.
-You should use `createGulpEsbuild` named export if you want to enable incremental build or piping mode.
-- [Esbuild incremental build](https://esbuild.github.io/api/#incremental) lets you to rebuild only changed part of code. Use it with gulp watch mode only. See [example](https://github.com/ym-project/gulp-esbuild/tree/master/examples/watch);
-- Piping mode lets you to receive data from other plugin via stream piping. See [example](https://github.com/ym-project/gulp-esbuild/tree/master/examples/piping).
-
-To enable incremental mode use
 ```js
 const {createGulpEsbuild} = require('gulp-esbuild')
-const gulpEsbuild = createGulpEsbuild({ incremental: true })
+const gulpEsbuild = createGulpEsbuild({
+	incremental: true, // enables the esbuild's incremental build
+	piping: true,      // enables piping
+})
 ```
 
-To enable pipe mode use
-```js
-const {createGulpEsbuild} = require('gulp-esbuild')
-const gulpEsbuild = createGulpEsbuild({ pipe: true })
-```
+**Notice**: `⚠️ piping is disabled by default ⚠️`
 
-### Notice
-This plugin doesn't receive data from other plugins via piping by default. To enable it use `createGulpEsbuild` with `pipe: true` flag.
-
-## Install
+## Installation
 ```bash
 npm install gulp-esbuild
+```
+or
+```bash
+yarn add gulp-esbuild
 ```
 
 ## Examples
