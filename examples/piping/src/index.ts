@@ -1,3 +1,3 @@
-import hello from '$/hello'
+import {cities} from './cities'
 
-hello()
+cities.forEach(city => console.log(`From ${city} with love.`))

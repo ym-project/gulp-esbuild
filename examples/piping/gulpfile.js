@@ -3,25 +3,21 @@ const {
 	dest,
 } = require('gulp')
 const {createGulpEsbuild} = require('gulp-esbuild')
-const ts = require('gulp-typescript')
-const alias = require('gulp-ts-alias').default
+const gulpReplace = require('gulp-replace')
 const gulpEsbuild = createGulpEsbuild({
 	pipe: true,
 })
 
-const tsProject = ts.createProject('./tsconfig.json')
-
 function build() {
-	return (
-		tsProject.src()
-			.pipe(alias({
-				configuration: tsProject.config,
-			}))
-			.pipe(gulpEsbuild({
-				platform: 'node',
-			}))
-			.pipe(dest(tsProject.config.compilerOptions.outDir))
-	)
+	return src('./src/*.ts')
+		.pipe(gulpReplace('GULP_CITY1', 'London'))
+		.pipe(gulpReplace('GULP_CITY2', 'New York'))
+		.pipe(gulpEsbuild({
+			loader: {
+				'.ts': 'ts',
+			},
+		}))
+		.pipe(dest('./dist'))
 }
 
 exports.build = build
