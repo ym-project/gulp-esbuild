@@ -3,7 +3,7 @@ import {BuildOptions} from 'esbuild'
 
 type Options = Omit<
 	BuildOptions,
-	'write' | 'incremental' | 'entryPoints' | 'stdin' | 'watch' | 'allowOverwrite'
+	'write' | 'incremental' | 'entryPoints' | 'stdin' | 'watch' | 'allowOverwrite' | 'absWorkingDir' | 'nodePaths'
 > & {
 	metafileName?: string
 }
