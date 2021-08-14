@@ -109,10 +109,12 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 
 ## Plugin arguments
 
-| **Name**                                                               | **Type**                                | **Default** |
+| **Name**                                                               | **Type**                                | **Default**       |
 | :--------------------------------------------------------------------- | :-------------------------------------: | :---------------: |
 | [sourcemap](https://esbuild.github.io/api/#sourcemap)                  | `boolean\|'inline'\|'external'\|'both'` |                   |
+| [sourceRoot](https://esbuild.github.io/api/#source-root)               | `string`                                |                   |
 | [sourcesContent](https://esbuild.github.io/api/#sources-content)       | `boolean`                               |                   |
+| [legalComments](https://esbuild.github.io/api/#legal-comments)         | `'none'\|'inline'\|'eof'\|'linked'\|'external'`             |
 | [format](https://esbuild.github.io/api/#format)                        | `'iife'\|'cjs'\|'esm'`                  |                   |
 | [globalName](https://esbuild.github.io/api/#global-name)               | `string`                                |                   |
 | [target](https://esbuild.github.io/api/#target)                        | `string`                                |                   |
