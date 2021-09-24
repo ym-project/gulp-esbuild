@@ -123,7 +123,8 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [minifyIdentifiers](https://esbuild.github.io/api/#minify)             | `boolean`                               |                   |
 | [minifySyntax](https://esbuild.github.io/api/#minify)                  | `boolean`                               |                   |
 | [charset](https://esbuild.github.io/api/#charset)                      | `'ascii'\|'utf8'`                       |                   |
-| [treeShaking](https://esbuild.github.io/api/#tree-shaking)             | `true\|'ignore-annotations'`            |                   |
+| [treeShaking](https://esbuild.github.io/api/#tree-shaking)             | `boolean`                               |                   |
+| [ignoreAnnotations](https://esbuild.github.io/api/#ignore-annotations) | `boolean`                               |                   |
 | [jsx](https://esbuild.github.io/api/#jsx)                              | `'transform'\|'preserve'`               |                   |
 | [jsxFactory](https://esbuild.github.io/api/#jsx-factory)               | `string`                                |                   |
 | [jsxFragment](https://esbuild.github.io/api/#jsx-fragment)             | `string`                                |                   |
