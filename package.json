@@ -31,14 +31,14 @@
     "lint": "eslint '**/*.{js,mjs}'"
   },
   "dependencies": {
-    "esbuild": "^0.13.2",
+    "esbuild": "^0.13.8",
     "plugin-error": "^1.0.1",
     "vinyl": "^2.2.1"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-plugin-jest": "^24.4.2",
+    "eslint": "^8.0.1",
+    "eslint-plugin-jest": "^25.2.1",
     "husky": "^4.3.8",
-    "jest": "^26.6.3"
+    "jest": "^27.2.5"
   }
 }
