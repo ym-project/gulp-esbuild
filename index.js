@@ -207,13 +207,15 @@ function pipedBuild() {
 			}
 
 			for (const entry of entryPoints) {
+				const customLoader = esbuildOptions.loader && esbuildOptions.loader[entry.extname];
+				const loader = customLoader || entry.extname.slice(1);
 				const params = {
 					...commonParams,
 					outfile: entry.relative.replace(/\.(ts|tsx|jsx)$/, '.js'),
 					stdin: {
 						contents: entry.contents.toString(),
 						resolveDir: entry.dirname,
-						loader: entry.extname.slice(1),
+						loader,
 						sourcefile: entry.path,
 					},
 				}
@@ -269,13 +271,15 @@ function pipedAndIncrementalBuild() {
 			}
 
 			for (const entry of entryPoints) {
+				const customLoader = esbuildOptions.loader && esbuildOptions.loader[entry.extname];
+				const loader = customLoader || entry.extname.slice(1);
 				const params = {
 					...commonParams,
 					outfile: entry.relative.replace(/\.(ts|tsx|jsx)$/, '.js'),
 					stdin: {
 						contents: entry.contents.toString(),
 						resolveDir: entry.dirname,
-						loader: entry.extname.slice(1),
+						loader,
 						sourcefile: entry.path,
 					},
 				}
