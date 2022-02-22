@@ -118,6 +118,10 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [format](https://esbuild.github.io/api/#format)                        | `'iife'\|'cjs'\|'esm'`                  |                   |
 | [globalName](https://esbuild.github.io/api/#global-name)               | `string`                                |                   |
 | [target](https://esbuild.github.io/api/#target)                        | `string`                                |                   |
+| [mangleProps](https://esbuild.github.io/api/#mangle-props)             | `RegExp`                                |                   |
+| [reserveProps](https://esbuild.github.io/api/#mangle-props)            | `RegExp`                                |                   |
+| [mangleCache](https://esbuild.github.io/api/#mangle-props)             | `object`                                |                   |
+| [drop](https://esbuild.github.io/api/#drop)                            | `'console'\|'debugger'`                 |                   |
 | [minify](https://esbuild.github.io/api/#minify)                        | `boolean`                               |                   |
 | [minifyWhitespace](https://esbuild.github.io/api/#minify)              | `boolean`                               |                   |
 | [minifyIdentifiers](https://esbuild.github.io/api/#minify)             | `boolean`                               |                   |
@@ -129,7 +133,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [jsxFactory](https://esbuild.github.io/api/#jsx-factory)               | `string`                                |                   |
 | [jsxFragment](https://esbuild.github.io/api/#jsx-fragment)             | `string`                                |                   |
 | [define](https://esbuild.github.io/api/#define)                        | `object`                                |                   |
-| [pure](https://esbuild.github.io/api/#pure)                            | `string`                                |                   |
+| [pure](https://esbuild.github.io/api/#pure)                            | `array`                                 |                   |
 | [keepNames](https://esbuild.github.io/api/#keep-names)                 | `boolean`                               |                   |
 | [banner](https://esbuild.github.io/api/#banner)                        | `object`                                |                   |
 | [footer](https://esbuild.github.io/api/#footer)                        | `object`                                |                   |
