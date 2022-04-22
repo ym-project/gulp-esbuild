@@ -111,7 +111,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 
 | **Name**                                                               | **Type**                                | **Default**       |
 | :--------------------------------------------------------------------- | :-------------------------------------: | :---------------: |
-| [sourcemap](https://esbuild.github.io/api/#sourcemap)                  | `boolean\|'inline'\|'external'\|'both'` |                   |
+| [sourcemap](https://esbuild.github.io/api/#sourcemap)                  | `boolean\|'linked'\|'inline'\|'external'\|'both'` |                   |
 | [sourceRoot](https://esbuild.github.io/api/#source-root)               | `string`                                |                   |
 | [sourcesContent](https://esbuild.github.io/api/#sources-content)       | `boolean`                               |                   |
 | [legalComments](https://esbuild.github.io/api/#legal-comments)         | `'none'\|'inline'\|'eof'\|'linked'\|'external'`             |
@@ -120,6 +120,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [target](https://esbuild.github.io/api/#target)                        | `string`                                |                   |
 | [mangleProps](https://esbuild.github.io/api/#mangle-props)             | `RegExp`                                |                   |
 | [reserveProps](https://esbuild.github.io/api/#mangle-props)            | `RegExp`                                |                   |
+| [mangleQuoted](https://esbuild.github.io/api/#mangle-quoted)           | `boolean`                               |                   |
 | [mangleCache](https://esbuild.github.io/api/#mangle-props)             | `object`                                |                   |
 | [drop](https://esbuild.github.io/api/#drop)                            | `'console'\|'debugger'`                 |                   |
 | [minify](https://esbuild.github.io/api/#minify)                        | `boolean`                               |                   |
