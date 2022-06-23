@@ -118,6 +118,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [format](https://esbuild.github.io/api/#format)                        | `'iife'\|'cjs'\|'esm'`                  |                   |
 | [globalName](https://esbuild.github.io/api/#global-name)               | `string`                                |                   |
 | [target](https://esbuild.github.io/api/#target)                        | `string`                                |                   |
+| supported                                                              | `object`                                |                   |
 | [mangleProps](https://esbuild.github.io/api/#mangle-props)             | `RegExp`                                |                   |
 | [reserveProps](https://esbuild.github.io/api/#mangle-props)            | `RegExp`                                |                   |
 | [mangleQuoted](https://esbuild.github.io/api/#mangle-quoted)           | `boolean`                               |                   |
@@ -141,6 +142,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [color](https://esbuild.github.io/api/#color)                          | `boolean`                               |                   |
 | [logLevel](https://esbuild.github.io/api/#log-level)                   | `'verbose'\|'debug'\|'info'\|'warning'\|'error'\|'silent'`  | `'silent'`        |
 | [logLimit](https://esbuild.github.io/api/#log-limit)                   | `number`                                |                   |
+| [logOverride](https://esbuild.github.io/api/#log-override)             | `object`                                |                   |
 | [bundle](https://esbuild.github.io/api/#bundle)                        | `boolean`                               |                   |
 | [splitting](https://esbuild.github.io/api/#splitting)                  | `boolean`                               |                   |
 | [preserveSymlinks](https://esbuild.github.io/api/#preserve-symlinks)   | `boolean`                               |                   |
