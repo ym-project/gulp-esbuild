@@ -118,7 +118,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [format](https://esbuild.github.io/api/#format)                        | `'iife'\|'cjs'\|'esm'`                  |                   |
 | [globalName](https://esbuild.github.io/api/#global-name)               | `string`                                |                   |
 | [target](https://esbuild.github.io/api/#target)                        | `string`                                |                   |
-| supported                                                              | `object`                                |                   |
+| [supported](https://esbuild.github.io/api/#supported)                  | `object`                                |                   |
 | [mangleProps](https://esbuild.github.io/api/#mangle-props)             | `RegExp`                                |                   |
 | [reserveProps](https://esbuild.github.io/api/#mangle-props)            | `RegExp`                                |                   |
 | [mangleQuoted](https://esbuild.github.io/api/#mangle-quoted)           | `boolean`                               |                   |
