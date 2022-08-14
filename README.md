@@ -131,9 +131,11 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [charset](https://esbuild.github.io/api/#charset)                      | `'ascii'\|'utf8'`                       |                   |
 | [treeShaking](https://esbuild.github.io/api/#tree-shaking)             | `boolean`                               |                   |
 | [ignoreAnnotations](https://esbuild.github.io/api/#ignore-annotations) | `boolean`                               |                   |
-| [jsx](https://esbuild.github.io/api/#jsx)                              | `'transform'\|'preserve'`               |                   |
+| [jsx](https://esbuild.github.io/api/#jsx)                              | `'transform'\|'preserve'\|'automatic'`  |                   |
 | [jsxFactory](https://esbuild.github.io/api/#jsx-factory)               | `string`                                |                   |
 | [jsxFragment](https://esbuild.github.io/api/#jsx-fragment)             | `string`                                |                   |
+| [jsxImportSource](https://esbuild.github.io/api/#jsx-import-source)    | `string`                                |                   |
+| [jsxDev](https://esbuild.github.io/api/#jsx-development)               | `boolean`                               |                   |
 | [define](https://esbuild.github.io/api/#define)                        | `object`                                |                   |
 | [pure](https://esbuild.github.io/api/#pure)                            | `array`                                 |                   |
 | [keepNames](https://esbuild.github.io/api/#keep-names)                 | `boolean`                               |                   |
