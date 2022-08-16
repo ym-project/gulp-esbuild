@@ -12,9 +12,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ym-project/gulp-esbuild"
+    "url": "https://github.com/ym-project/gulp-esbuild/tree/v0"
   },
-  "homepage": "https://github.com/ym-project/gulp-esbuild#readme",
+  "homepage": "https://github.com/ym-project/gulp-esbuild/tree/v0#readme",
   "bugs": "https://github.com/ym-project/gulp-esbuild/issues",
   "license": "MIT",
   "main": "index.js",
