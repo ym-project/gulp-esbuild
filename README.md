@@ -135,7 +135,8 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [jsxFactory](https://esbuild.github.io/api/#jsx-factory)               | `string`                                |                   |
 | [jsxFragment](https://esbuild.github.io/api/#jsx-fragment)             | `string`                                |                   |
 | [jsxImportSource](https://esbuild.github.io/api/#jsx-import-source)    | `string`                                |                   |
-| [jsxDev](https://esbuild.github.io/api/#jsx-development)               | `boolean`                               |                   |
+| [jsxDev](https://esbuild.github.io/api/#jsx-dev)                       | `boolean`                               |                   |
+| [jsxSideEffects](https://esbuild.github.io/api/#jsx-side-effects)      | `boolean`                               |                   |
 | [define](https://esbuild.github.io/api/#define)                        | `object`                                |                   |
 | [pure](https://esbuild.github.io/api/#pure)                            | `array`                                 |                   |
 | [keepNames](https://esbuild.github.io/api/#keep-names)                 | `boolean`                               |                   |
