@@ -2,7 +2,7 @@ const {Transform} = require('stream')
 const {build} = require('esbuild')
 const PluginError = require('plugin-error')
 const Vinyl = require('vinyl')
-const {name: PLUGIN_NAME} = require('./package.json')
+const {name: PLUGIN_NAME} = require('../package.json')
 const metaFileDefaultName = 'metafile.json'
 
 //

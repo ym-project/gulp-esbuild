@@ -17,12 +17,12 @@
   "homepage": "https://github.com/ym-project/gulp-esbuild/tree/v0#readme",
   "bugs": "https://github.com/ym-project/gulp-esbuild/issues",
   "license": "MIT",
-  "main": "index.js",
+  "main": "src/index.js",
   "exports": {
-    "import": "./index.mjs",
-    "require": "./index.js"
+    "import": "./src/index.mjs",
+    "require": "./src/index.js"
   },
-  "types": "index.d.ts",
+  "types": "src/index.d.ts",
   "engines": {
     "node": ">=12"
   },

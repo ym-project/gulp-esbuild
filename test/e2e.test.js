@@ -1,5 +1,5 @@
-const gulpEsbuild = require('..')
-const {createGulpEsbuild} = require('..')
+const gulpEsbuild = require('../src')
+const {createGulpEsbuild} = require('../src')
 const {Readable} = require('stream')
 const Vinyl = require('vinyl')
 const path = require('path')

@@ -5,7 +5,7 @@ import Vinyl from 'vinyl'
 import {createRequire} from 'module'
 
 const require = createRequire(import.meta.url)
-const {name: PLUGIN_NAME} = require('./package.json')
+const {name: PLUGIN_NAME} = require('../package.json')
 const {build} = esbuild
 const metaFileDefaultName = 'metafile.json'
 
