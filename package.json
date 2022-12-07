@@ -1,6 +1,6 @@
 {
   "name": "gulp-esbuild",
-  "version": "0.10.6",
+  "version": "0.10.7",
   "description": "gulp plugin for esbuild bundler",
   "keywords": [
     "gulpplugin"
