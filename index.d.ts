@@ -1,23 +1,25 @@
 import {Transform} from 'stream'
 import {BuildOptions} from 'esbuild'
 
-type Options = Omit<
-	BuildOptions,
-	'write' | 'incremental' | 'entryPoints' | 'stdin' | 'watch' | 'allowOverwrite' | 'absWorkingDir' | 'nodePaths'
-> & {
-	metafileName?: string
+declare namespace gulpEsbuild {
+	type Options = Omit<
+		BuildOptions,
+		'write' | 'incremental' | 'entryPoints' | 'stdin' | 'watch' | 'allowOverwrite' | 'absWorkingDir' | 'nodePaths'
+	> & {
+		metafileName?: string
+	}
+
+	interface CreateOptions {
+		incremental?: boolean
+		pipe?: boolean
+	}
+	
+	type GulpEsbuild = (options: Options) => Transform
+	type CreateGulpEsbuild = (options: CreateOptions) => GulpEsbuild
 }
 
-interface CreateOptions {
-	incremental?: boolean
-	pipe?: boolean
-}
-
-type GulpEsbuild = (options: Options) => Transform
-type CreateGulpEsbuild = (options: CreateOptions) => GulpEsbuild
-
-declare const gulpEsbuild: GulpEsbuild & {
-	createGulpEsbuild: CreateGulpEsbuild
+declare const gulpEsbuild: gulpEsbuild.GulpEsbuild & {
+	createGulpEsbuild: gulpEsbuild.CreateGulpEsbuild
 }
 
 export = gulpEsbuild
