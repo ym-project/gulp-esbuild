@@ -138,23 +138,64 @@ it('Check createGulpEsbuild export. Return function should equals gulpEsbuild fu
 // Flag "pipe" changes a behavior. It use esbuild stdin API and esbuild can read files contents via Vinyl.
 // So we can pass any contents and path and it'll be ok.
 
-it('Check pipe flag. Passed contents should pass to plugin.', () => {
-	const fn = createGulpEsbuild({pipe: true})
-	const stream = fn()
-	const content = 'console.log("custom content inside empty-file.js")'
-
-	wrapStream(stream).then(files => {
-		const [file] = files
-		expect(file.contents.toString()).toContain(content)
+describe('Check pipe flag', () => {
+	it('Passed contents should pass to plugin.', () => {
+		const fn = createGulpEsbuild({pipe: true})
+		const stream = fn()
+		const content = 'console.log("custom content inside empty-file.js")'
+	
+		wrapStream(stream).then(files => {
+			const [file] = files
+			expect(file.contents.toString()).toContain(content)
+		})
+	
+		stream.write(new Vinyl({
+			path: resolve('empty-file.js'),
+			contents: Buffer.from(content),
+			base: resolve(''),
+		}))
+	
+		stream.end()
 	})
 
-	stream.write(new Vinyl({
-		path: resolve('empty-file.js'),
-		contents: Buffer.from(content),
-		base: resolve(''),
-	}))
+	it ('Pass "outfile" option. Outfile name should be the same', () => {
+		const outfile = 'result.jsx'
 
-	stream.end()
+		const fn = createGulpEsbuild({pipe: true})
+		const stream = fn({outfile})
+		const content = 'console.log("")'
+
+		wrapStream(stream).then(files => {
+			const [file] = files
+			expect(file.path.endsWith(outfile)).toBeTruthy()
+		})
+
+		stream.write(new Vinyl({
+			path: resolve('empty-file.js'),
+			contents: Buffer.from(content),
+			base: resolve(''),
+		}))
+
+		stream.end()
+	})
+
+	it('Do not pass "outfile" option. Outfile name should have .js extension', () => {
+		const fn = createGulpEsbuild({pipe: true})
+		const stream = fn()
+		
+		wrapStream(stream).then(files => {
+			const [file] = files
+			expect(file.path.endsWith('.js')).toBeTruthy()
+		})
+
+		stream.write(new Vinyl({
+			path: resolve('empty-file.ts'),
+			contents: Buffer.from(''),
+			base: resolve(''),
+		}))
+
+		stream.end()
+	})
 })
 
 it.todo('Check incremental flag.')
