@@ -156,6 +156,8 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [outbase](https://esbuild.github.io/api/#outbase)                      | `string`                                |                   |
 | [platform](https://esbuild.github.io/api/#platform)                    | `'browser'\|'node'\|'neutral'`          |                   |
 | [external](https://esbuild.github.io/api/#external)                    | `array`                                 |                   |
+| [packages](https://esbuild.github.io/api/#packages)                    | `'external'`                            |                   |
+| [alias](https://esbuild.github.io/api/#alias)                          | `object`                                |                   |
 | [loader](https://esbuild.github.io/api/#loader)                        | `object`                                |                   |
 | [resolveExtensions](https://esbuild.github.io/api/#resolve-extensions) | `array`                                 |                   |
 | [mainFields](https://esbuild.github.io/api/#main-fields)               | `array`                                 |                   |
