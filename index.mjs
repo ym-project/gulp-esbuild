@@ -6,7 +6,7 @@ import {createRequire} from 'module'
 
 const require = createRequire(import.meta.url)
 const {name: PLUGIN_NAME} = require('./package.json')
-const {build} = esbuild
+const {build, context} = esbuild
 const metaFileDefaultName = 'metafile.json'
 
 //
@@ -136,7 +136,7 @@ function simpleBuild() {
 }
 
 function incrementalBuild() {
-	let promise
+	let ctx
 
 	return function plugin(pluginOptions = {}) {
 		const entryPoints = []
@@ -151,7 +151,6 @@ function incrementalBuild() {
 				...esbuildOptions,
 				entryPoints: entryPoints.map(entry => entry.path),
 				write: false,
-				incremental: true,
 			}
 
 			// set outdir by default
@@ -159,32 +158,32 @@ function incrementalBuild() {
 				params.outdir = '.'
 			}
 
+			let result
+
 			try {
 				// if it's the first build
-				if (!promise) {
-					promise = await build(params)
+				if (!ctx) {
+					ctx = await context(params)
 				}
-				// if it's > 1 build
-				else {
-					promise = await promise.rebuild()
-				}
+				
+				result = await ctx.rebuild()
 			} catch(err) {
 				return cb(createError(err))
 			}
 
-			promise.outputFiles.forEach(file => {
+			result.outputFiles.forEach(file => {
 				this.push(createFile({
 					path: file.path,
 					contents: Buffer.from(file.contents),
 				}))
 			})
 
-			if (promise.metafile) {
+			if (result.metafile) {
 				const name = specialOptions.metafileName || metaFileDefaultName
 
 				this.push(createFile({
 					path: name,
-					contents: Buffer.from(JSON.stringify(promise.metafile)),
+					contents: Buffer.from(JSON.stringify(result.metafile)),
 				}))
 			}
 
@@ -260,7 +259,7 @@ function pipedBuild() {
 }
 
 function pipedAndIncrementalBuild() {
-	let promise
+	let ctx
 
 	return function plugin(pluginOptions = {}) {
 		const entryPoints = []
@@ -292,32 +291,32 @@ function pipedAndIncrementalBuild() {
 					},
 				}
 
+				let result
+
 				try {
 					// if it's the first build
-					if (!promise) {
-						promise = await build(params)
+					if (!ctx) {
+						ctx = await context(params)
 					}
-					// if it's > 1 build
-					else {
-						promise = await promise.rebuild()
-					}
+					
+					result = await ctx.rebuild()
 				} catch(err) {
 					return cb(createError(err))
 				}
 
-				promise.outputFiles.forEach(file => {
+				result.outputFiles.forEach(file => {
 					this.push(createFile({
 						path: file.path,
 						contents: Buffer.from(file.contents),
 					}))
 				})
 
-				if (promise.metafile) {
+				if (result.metafile) {
 					const name = specialOptions.metafileName || metaFileDefaultName
 
 					this.push(createFile({
 						path: name,
-						contents: Buffer.from(JSON.stringify(promise.metafile)),
+						contents: Buffer.from(JSON.stringify(result.metafile)),
 					}))
 				}
 
