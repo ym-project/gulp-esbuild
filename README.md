@@ -128,6 +128,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [minifyWhitespace](https://esbuild.github.io/api/#minify)              | `boolean`                               |                   |
 | [minifyIdentifiers](https://esbuild.github.io/api/#minify)             | `boolean`                               |                   |
 | [minifySyntax](https://esbuild.github.io/api/#minify)                  | `boolean`                               |                   |
+| [lineLimit](https://esbuild.github.io/api/#line-limit)                 | `number`                                |                   |
 | [charset](https://esbuild.github.io/api/#charset)                      | `'ascii'\|'utf8'`                       |                   |
 | [treeShaking](https://esbuild.github.io/api/#tree-shaking)             | `boolean`                               |                   |
 | [ignoreAnnotations](https://esbuild.github.io/api/#ignore-annotations) | `boolean`                               |                   |
@@ -146,6 +147,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [logLevel](https://esbuild.github.io/api/#log-level)                   | `'verbose'\|'debug'\|'info'\|'warning'\|'error'\|'silent'`  | `'silent'`        |
 | [logLimit](https://esbuild.github.io/api/#log-limit)                   | `number`                                |                   |
 | [logOverride](https://esbuild.github.io/api/#log-override)             | `object`                                |                   |
+| [tsconfigRaw](https://esbuild.github.io/api/#tsconfig-raw)             | `string`\|`object`                      |                   |
 | [bundle](https://esbuild.github.io/api/#bundle)                        | `boolean`                               |                   |
 | [splitting](https://esbuild.github.io/api/#splitting)                  | `boolean`                               |                   |
 | [preserveSymlinks](https://esbuild.github.io/api/#preserve-symlinks)   | `boolean`                               |                   |
