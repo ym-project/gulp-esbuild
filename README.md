@@ -124,6 +124,7 @@ More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/exam
 | [mangleQuoted](https://esbuild.github.io/api/#mangle-quoted)           | `boolean`                               |                   |
 | [mangleCache](https://esbuild.github.io/api/#mangle-props)             | `object`                                |                   |
 | [drop](https://esbuild.github.io/api/#drop)                            | `'console'\|'debugger'`                 |                   |
+| [dropLabels](https://esbuild.github.io/api/#drop-labels)               | `array`                                 |                   |
 | [minify](https://esbuild.github.io/api/#minify)                        | `boolean`                               |                   |
 | [minifyWhitespace](https://esbuild.github.io/api/#minify)              | `boolean`                               |                   |
 | [minifyIdentifiers](https://esbuild.github.io/api/#minify)             | `boolean`                               |                   |
