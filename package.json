@@ -24,7 +24,7 @@
   },
   "types": "index.d.ts",
   "engines": {
-    "node": ">=12"
+    "node": ">=16"
   },
   "scripts": {
     "test": "jest",
