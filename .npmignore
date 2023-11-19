@@ -1,6 +1,6 @@
 test
 examples
-.huskyrc.js
 .eslintignore
 .eslintrc.js
 .github
+.husky

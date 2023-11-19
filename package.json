@@ -28,7 +28,8 @@
   },
   "scripts": {
     "test": "jest",
-    "lint": "eslint '**/*.{js,mjs}'"
+    "lint": "eslint '**/*.{js,mjs}'",
+    "prepare": "husky install"
   },
   "dependencies": {
     "esbuild": "^0.19.6",
@@ -38,7 +39,7 @@
   "devDependencies": {
     "eslint": "^8.54.0",
     "eslint-plugin-jest": "^27.6.0",
-    "husky": "^4.3.8",
+    "husky": "^8.0.0",
     "jest": "^29.7.0"
   }
 }
