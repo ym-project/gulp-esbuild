@@ -32,13 +32,13 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "esbuild": "^0.19.6",
+    "esbuild": "^0.21.5",
     "plugin-error": "^2.0.1",
     "vinyl": "^3.0.0"
   },
   "devDependencies": {
-    "eslint": "^8.54.0",
-    "eslint-plugin-jest": "^27.6.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-jest": "^27.9.0",
     "husky": "^8.0.0",
     "jest": "^29.7.0"
   }
