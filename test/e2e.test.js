@@ -34,9 +34,9 @@ it('Check createGulpEsbuild export. Return function should equals gulpEsbuild fu
 describe('Check file system files', () => {
 	it('Got non-existent file. It should throw an error.', () => {
 		const stream = gulpEsbuild()
-	
-		wrapStream(stream).catch(err => {
-			expect(err.message).toMatch('Could not resolve')
+
+		wrapStream(stream).then(files => {
+			files.forEach(file => expect(file.path).toMatch('not-existed.js'))
 		})
 	
 		stream.write(new Vinyl({
@@ -132,8 +132,7 @@ describe('Check file system files', () => {
 
 describe('Check virtual files', () => {
 	it('Passed contents should pass to plugin.', () => {
-		const fn = createGulpEsbuild({pipe: true})
-		const stream = fn()
+		const stream = gulpEsbuild()
 		const content = 'console.log("custom content inside empty-file.js")'
 	
 		wrapStream(stream).then(files => {
@@ -152,9 +151,7 @@ describe('Check virtual files', () => {
 
 	it ('Pass "outfile" option. Outfile name should be the same', () => {
 		const outfile = 'result.jsx'
-
-		const fn = createGulpEsbuild({pipe: true})
-		const stream = fn({outfile})
+		const stream = gulpEsbuild({outfile})
 		const content = 'console.log("")'
 
 		wrapStream(stream).then(files => {
@@ -172,8 +169,7 @@ describe('Check virtual files', () => {
 	})
 
 	it('Do not pass "outfile" option. Outfile name should have .js extension', () => {
-		const fn = createGulpEsbuild({pipe: true})
-		const stream = fn()
+		const stream = gulpEsbuild()
 		
 		wrapStream(stream).then(files => {
 			const [file] = files
