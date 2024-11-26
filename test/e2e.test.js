@@ -35,8 +35,8 @@ describe('Check file system files', () => {
 	it('Got non-existent file. It should throw an error.', () => {
 		const stream = gulpEsbuild()
 
-		wrapStream(stream).then(files => {
-			files.forEach(file => expect(file.path).toMatch('not-existed.js'))
+		wrapStream(stream).catch(err => {
+			expect(err.message).toMatch('Could not resolve')
 		})
 	
 		stream.write(new Vinyl({
