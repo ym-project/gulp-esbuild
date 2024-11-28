@@ -3,19 +3,21 @@
 # gulp-esbuild
 A [gulp](https://gulpjs.com) plugin for the [esbuild](https://esbuild.github.io) bundler.
 
-There are two exports available: `gulpEsbuild` and `createGulpEsbuild`. In most cases you should use the `gulpEsbuild` export. Use the `createGuipEsbuild` export if you want to enable the esbuild's incremental build or piping:
-* the [esbuild's incremental build](https://esbuild.github.io/api/#incremental) is used with the [gulp's watching files API](https://gulpjs.com/docs/en/getting-started/watching-files/) and allows you to rebuild only changed parts of code ([example](https://github.com/ym-project/gulp-esbuild/tree/master/examples/watch));
-* piping allows you to receive data from other plugins via stream piping ([example](https://github.com/ym-project/gulp-esbuild/tree/master/examples/piping)).
+There are two exports available: `gulpEsbuild` and `createGulpEsbuild`. In most cases you should use the `gulpEsbuild` export. Use the `createGuipEsbuild` export if you want to enable the esbuild's incremental build.
+The [esbuild's incremental build](https://esbuild.github.io/api/#incremental) is used with the [gulp's watching files API](https://gulpjs.com/docs/en/getting-started/watching-files/) and allows you to rebuild only changed parts of code ([example](https://github.com/ym-project/gulp-esbuild/tree/v0/examples/watch));
 
 ```js
 const {createGulpEsbuild} = require('gulp-esbuild')
 const gulpEsbuild = createGulpEsbuild({
 	incremental: true, // enables the esbuild's incremental build
-	piping: true,      // enables piping
 })
 ```
 
-**Notice**: `⚠️ piping is disabled by default ⚠️`
+### ⚠️ Notice ⚠️
+
+Esbuild doesn't fully support working with the virtual files which gulp send when you use: `src(...).pipe(gulpEsbuild(...))`.
+We found workaround using some tricks, but one limitation still remains. **Every file you send via `src(...)` must exist in the file system**.
+Its contents are not important, since they will be taken from the virtual file. But existence in the file system is required.
 
 ## Installation
 ```bash
@@ -105,7 +107,7 @@ exports.watch = watchTask
 npm run watch
 ```
 
-More examples [here](https://github.com/ym-project/gulp-esbuild/tree/master/examples)
+More examples [here](https://github.com/ym-project/gulp-esbuild/tree/v0/examples)
 
 ## Plugin arguments
 

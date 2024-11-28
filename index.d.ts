@@ -11,7 +11,6 @@ declare namespace gulpEsbuild {
 
 	interface CreateOptions {
 		incremental?: boolean
-		pipe?: boolean
 	}
 	
 	type GulpEsbuild = (options: Options) => Transform
