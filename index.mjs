@@ -3,7 +3,7 @@ import esbuild from 'esbuild'
 import PluginError from 'plugin-error'
 import Vinyl from 'vinyl'
 import {createRequire} from 'module'
-import resolvePlugin from './resolve-plugin'
+import resolvePlugin from './resolve-plugin.js'
 
 const require = createRequire(import.meta.url)
 const {name: PLUGIN_NAME} = require('./package.json')
