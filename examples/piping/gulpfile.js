@@ -2,11 +2,8 @@ const {
 	src,
 	dest,
 } = require('gulp')
-const {createGulpEsbuild} = require('gulp-esbuild')
+const gulpEsbuild = require('gulp-esbuild')
 const gulpReplace = require('gulp-replace')
-const gulpEsbuild = createGulpEsbuild({
-	pipe: true,
-})
 
 function build() {
 	return src('./src/*.ts')
