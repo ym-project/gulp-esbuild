@@ -143,7 +143,6 @@ describe('Check virtual files', () => {
 		stream.write(new Vinyl({
 			path: resolve('empty-file.js'),
 			contents: Buffer.from(content),
-			base: resolve(''),
 		}))
 	
 		stream.end()
@@ -162,7 +161,6 @@ describe('Check virtual files', () => {
 		stream.write(new Vinyl({
 			path: resolve('empty-file.js'),
 			contents: Buffer.from(content),
-			base: resolve(''),
 		}))
 
 		stream.end()
@@ -179,7 +177,56 @@ describe('Check virtual files', () => {
 		stream.write(new Vinyl({
 			path: resolve('empty-file.js'),
 			contents: Buffer.from(''),
-			base: resolve(''),
+		}))
+
+		stream.end()
+	})
+
+	it('Check typescript loader', () => {
+		const stream = gulpEsbuild({
+			loader: {
+				'.ts': 'ts',
+			},
+		})
+		const content = `
+			const n: number = 10;
+		`
+		const expectContent = 'const n = 10;'
+
+		wrapStream(stream).then(files => {
+			const [file] = files
+			expect(file.contents.toString()).toContain(expectContent)
+		})
+
+		stream.write(new Vinyl({
+			path: resolve('empty-file.ts'),
+			contents: Buffer.from(content),
+		}))
+
+		stream.end()
+	})
+
+	it('Check any import and file generation', () => {
+		const stream = gulpEsbuild({
+			loader: {
+				'.css': 'css',
+			},
+			bundle: true,
+		})
+		const content = `
+			import './styles.css';
+			console.log('hello');
+		`
+		
+		wrapStream(stream).then(files => {
+			const [jsFile, cssFile] = files
+			expect(jsFile.path.endsWith('.js')).toBeTruthy()
+			expect(cssFile.path.endsWith('.css')).toBeTruthy()
+		})
+
+		stream.write(new Vinyl({
+			path: resolve('empty-file.js'),
+			contents: Buffer.from(content),
 		}))
 
 		stream.end()
