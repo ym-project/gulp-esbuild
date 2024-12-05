@@ -4,6 +4,7 @@
     "build": "gulp build"
   },
   "devDependencies": {
+    "esbuild": "^0.24.0",
     "gulp": "^4.0.2",
     "gulp-esbuild": "latest",
     "gulp-replace": "^1.1.3"
