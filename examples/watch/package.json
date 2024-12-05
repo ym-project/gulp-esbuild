@@ -5,6 +5,7 @@
     "watch": "gulp watch"
   },
   "devDependencies": {
+    "esbuild": "^0.24.0",
     "gulp": "^4.0.2",
     "gulp-esbuild": "latest"
   }

@@ -21,11 +21,11 @@ Its contents are not important, since they will be taken from the virtual file. 
 
 ## Installation
 ```bash
-npm install gulp-esbuild
+npm install gulp-esbuild esbuild
 ```
 or
 ```bash
-yarn add gulp-esbuild
+yarn add gulp-esbuild esbuild
 ```
 
 ## Examples
