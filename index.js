@@ -26,7 +26,22 @@ function createTransformStream(flushFn, entryPoints) {
 				return cb(createError(new TypeError('File should be a buffer')))
 			}
 
-			entryPoints.push(file)
+			// What is going on?
+			//
+			// The problem attaches incrementalBuild. Because of rebuild context creates once,
+			// resolvePlugin doesn't receive updated virtual files. We moved variable `entryPoints`
+			// to a higher level so the plugin could receive actual files by reference.
+			//
+			// But now entryPoints doesn't reset its state and stores all files for every rebuilt.
+			// This code searches existed files and updates their contents.
+			const fileIndex = entryPoints.findIndex((cfile) => cfile.path === file.path)
+
+			if (fileIndex >= 0) {
+				entryPoints[fileIndex] = file
+			} else {
+				entryPoints.push(file)
+			}
+
 			cb(null)
 		},
 		flush: flushFn,
@@ -57,6 +72,7 @@ function simpleBuild() {
 		const {metafileName, esbuildOptions} = splitOptions(pluginOptions)
 
 		async function flushFunction(cb) {
+			/** @type import('esbuild').BuildOptions */
 			const params = {
 				logLevel: 'silent',
 				...esbuildOptions,
@@ -105,14 +121,16 @@ function simpleBuild() {
 }
 
 function incrementalBuild() {
+	/** @type import('esbuild').BuildContext */
 	let ctx
+	/** @type Array<import('vinyl').BufferFile> */
+	const entryPoints = []
 
 	return function plugin(pluginOptions = {}) {
-		/** @type Array<import('vinyl').BufferFile> */
-		const entryPoints = []
 		const {metafileName, esbuildOptions} = splitOptions(pluginOptions)
 
 		async function flushFunction(cb) {
+			/** @type import('esbuild').BuildOptions */
 			const params = {
 				logLevel: 'silent',
 				...esbuildOptions,
