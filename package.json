@@ -1,48 +1,69 @@
 {
-  "name": "gulp-esbuild",
-  "version": "0.14.1",
-  "description": "gulp plugin for esbuild bundler",
-  "keywords": [
-    "gulpplugin"
-  ],
-  "author": {
-    "name": "ym-project",
-    "email": "ym-project@protonmail.com",
-    "url": "https://github.com/ym-project"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ym-project/gulp-esbuild/tree/v0"
-  },
-  "homepage": "https://github.com/ym-project/gulp-esbuild/tree/v0#readme",
-  "bugs": "https://github.com/ym-project/gulp-esbuild/issues",
-  "license": "MIT",
-  "main": "index.js",
-  "exports": {
-    "import": "./index.mjs",
-    "require": "./index.js"
-  },
-  "types": "index.d.ts",
-  "engines": {
-    "node": ">=16"
-  },
-  "scripts": {
-    "test": "jest",
-    "lint": "eslint '**/*.{js,mjs}'",
-    "prepare": "husky install"
-  },
-  "dependencies": {
-    "plugin-error": "^2.0.1",
-    "vinyl": "^3.0.0"
-  },
-  "devDependencies": {
-    "esbuild": "^0.25.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-jest": "^27.9.0",
-    "husky": "^8.0.0",
-    "jest": "^29.7.0"
-  },
-  "peerDependencies": {
-    "esbuild": ">=0.17"
-  }
+	"name": "gulp-esbuild",
+	"version": "0.14.1",
+	"description": "gulp plugin for esbuild bundler",
+	"keywords": [
+		"esbuild",
+		"gulp",
+		"gulpplugin"
+	],
+	"homepage": "https://github.com/ym-project/gulp-esbuild/tree/v0#readme",
+	"bugs": "https://github.com/ym-project/gulp-esbuild/issues",
+	"license": "MIT",
+	"author": {
+		"name": "ym-project",
+		"email": "ym-project@protonmail.com",
+		"url": "https://github.com/ym-project"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ym-project/gulp-esbuild/tree/v0"
+	},
+	"type": "module",
+	"main": "./dist/plugin.cjs",
+	"module": "./dist/plugin.mjs",
+	"types": "./dist/plugin.d.ts",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/plugin.d.ts",
+				"default": "./dist/plugin.mjs"
+			},
+			"require": {
+				"types": "./dist/plugin.d.cts",
+				"default": "./dist/plugin.cjs"
+			}
+		},
+		"./package.json": "./package.json"
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "node --import=tsx ./scripts/build.ts",
+		"check:attw": "sh scripts/check-attw.sh",
+		"fmt": "oxfmt --check",
+		"lint": "oxlint"
+	},
+	"dependencies": {
+		"plugin-error": "^2.0.1",
+		"vinyl": "^3.0.1"
+	},
+	"devDependencies": {
+		"@types/node": "^22.19.19",
+		"@types/vinyl": "^2.0.12",
+		"esbuild": "^0.28.0",
+		"jest": "^30.4.2",
+		"oxfmt": "^0.52.0",
+		"oxlint": "^1.67.0",
+		"tsx": "^4.22.3",
+		"typescript": "^6.0.3"
+	},
+	"peerDependencies": {
+		"esbuild": ">=0.17",
+		"gulp": ">=4.0.0"
+	},
+	"engines": {
+		"node": ">=22"
+	}
 }

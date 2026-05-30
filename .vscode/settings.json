@@ -1,0 +1,17 @@
+{
+	"[git-commit]": {
+		"editor.rulers": [72, 100]
+	},
+	"git.inputValidationLength": 100,
+	"git.inputValidationSubjectLength": 72,
+	"editor.tabSize": 4,
+	"editor.insertSpaces": false,
+	"files.insertFinalNewline": true,
+	"oxc.configPath": "oxlint.config.ts",
+	"oxc.fmt.configPath": "oxfmt.config.ts",
+	"editor.defaultFormatter": "oxc.oxc-vscode",
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.oxc": "always"
+	}
+}
