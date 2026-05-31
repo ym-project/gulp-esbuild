@@ -64,7 +64,7 @@
 	},
 	"peerDependencies": {
 		"esbuild": ">=0.17",
-		"gulp": ">=4.0.0"
+		"gulp": ">=4"
 	},
 	"engines": {
 		"node": ">=22"

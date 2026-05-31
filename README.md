@@ -34,6 +34,7 @@ function build() {
 	return src('./index.tsx')
 		.pipe(
 			gulpEsbuild({
+				entryPoints: ['index.tsx'],
 				outfile: 'bundle.js',
 				bundle: true,
 				loader: {
@@ -68,7 +69,7 @@ npm run build
 `gulpfile.js`
 
 ```js
-const { src, dest } = require('gulp');
+const { src, dest, watch } = require('gulp');
 const { createGulpEsbuild } = require('gulp-esbuild');
 const gulpEsbuild = createGulpEsbuild({ incremental: true });
 
@@ -76,6 +77,7 @@ function build() {
 	return src('./src/index.js')
 		.pipe(
 			gulpEsbuild({
+				entryPoints: ['src/index.js'],
 				outfile: 'outfile.js',
 				bundle: true,
 			}),
