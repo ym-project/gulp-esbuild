@@ -4,9 +4,9 @@
 
 A [gulp](https://gulpjs.com) plugin for the [esbuild](https://esbuild.github.io) bundler.
 
-There are 2 available exports: `gulpEsbuild` and `createGulpEsbuild`. In most cases you should use the `gulpEsbuild` export. Use the `createGuipEsbuild` export if you want to enable the esbuild's incremental build.
+There are 2 available exports: `gulpEsbuild` and `createGulpEsbuild`. In most cases, you should use the `gulpEsbuild` export. Use the `createGulpEsbuild` export if you want to enable esbuild's incremental build.
 
-The [esbuild's incremental build](https://esbuild.github.io/api/#incremental) is used with the [gulp's watching files API](https://gulpjs.com/docs/en/getting-started/watching-files/) and allows you to rebuild only changed parts of code ([example](https://github.com/ym-project/gulp-esbuild/tree/v0/examples/watch));
+esbuild's [incremental build](https://esbuild.github.io/api/#incremental) is used together with gulp's [watch API](https://gulpjs.com/docs/en/getting-started/watching-files/) and allows you to rebuild only the changed parts of the code ([example](https://github.com/ym-project/gulp-esbuild/tree/v0/examples/watch)).
 
 ## Installation
 
