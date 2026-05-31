@@ -43,19 +43,22 @@
 		"build": "node --import=tsx ./scripts/build.ts",
 		"check:attw": "sh scripts/check-attw.sh",
 		"fmt": "oxfmt --check",
-		"lint": "oxlint"
+		"lint": "oxlint",
+		"test": "jest"
 	},
 	"dependencies": {
 		"plugin-error": "^2.0.1",
 		"vinyl": "^3.0.1"
 	},
 	"devDependencies": {
+		"@jest/globals": "^30.4.1",
 		"@types/node": "^22.19.19",
 		"@types/vinyl": "^2.0.12",
 		"esbuild": "^0.28.0",
 		"jest": "^30.4.2",
 		"oxfmt": "^0.52.0",
 		"oxlint": "^1.67.0",
+		"ts-jest": "^29.4.11",
 		"tsx": "^4.22.3",
 		"typescript": "^6.0.3"
 	},

@@ -4,6 +4,5 @@ export default defineConfig({
 	plugins: ['jest', 'import'],
 	env: {
 		node: true,
-		jest: true,
 	},
 });
