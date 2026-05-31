@@ -1,8 +1,7 @@
 {
 	"private": true,
 	"scripts": {
-		"build:default": "gulp buildDefaultName",
-		"build:custom": "gulp buildCustomName"
+		"build": "gulp build"
 	},
 	"devDependencies": {
 		"esbuild": "^0.28.0",

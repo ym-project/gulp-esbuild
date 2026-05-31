@@ -1,1 +1,1 @@
-console.log('metafile example')
+console.log('Hello, world!');
