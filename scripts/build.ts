@@ -2,16 +2,8 @@ import type { BuildOptions } from 'esbuild';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { build } from 'esbuild';
-import { dependencies, devDependencies, peerDependencies } from '../package.json';
 
 const OUTPUT_DIR = path.resolve(process.cwd(), 'dist');
-
-// Exclude all dependencies from the bundle
-const external: Set<string> = new Set([
-	...Object.keys(dependencies),
-	...Object.keys(devDependencies),
-	...Object.keys(peerDependencies),
-]);
 
 const commonConfig: BuildOptions = {
 	entryPoints: [path.resolve(process.cwd(), 'src', 'index.ts')],
@@ -19,7 +11,7 @@ const commonConfig: BuildOptions = {
 	platform: 'node',
 	target: 'node22',
 	loader: { '.ts': 'ts' },
-	external: Array.from(external),
+	packages: 'external',
 };
 
 const buildCjs = () =>
