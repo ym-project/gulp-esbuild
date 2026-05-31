@@ -26,4 +26,13 @@ export default defineConfig({
 	},
 	sortPackageJson: true,
 	insertFinalNewline: true,
+	overrides: [
+		{
+			files: ['*.yml'],
+			options: {
+				tabWidth: 2,
+				useTabs: false,
+			},
+		},
+	],
 });
