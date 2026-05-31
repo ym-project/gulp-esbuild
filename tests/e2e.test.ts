@@ -131,3 +131,154 @@ describe('Given outdir and outfile options', () => {
 		await expect(promise).rejects.toThrow('Cannot use both "outfile" and "outdir"');
 	});
 });
+
+describe('Given metafile option', () => {
+	it('When metafile is true', async () => {
+		const stream = gulpEsbuild({
+			entryPoints: ['file.js'],
+			metafile: true,
+		});
+		const promise = wrapStream(stream);
+
+		stream.write(
+			new Vinyl({
+				path: 'file.js',
+				contents: Buffer.from(''),
+			}),
+		);
+		stream.end();
+
+		const files = await promise;
+
+		expect(files.length).toBe(2);
+		expect(files[0].path).toContain('file.js');
+		expect(files[1].path).toBe('metafile.json');
+	});
+
+	it('When metafileName is provided', async () => {
+		const stream = gulpEsbuild({
+			entryPoints: ['file.js'],
+			metafile: true,
+			metafileName: 'meta.json',
+		});
+		const promise = wrapStream(stream);
+
+		stream.write(
+			new Vinyl({
+				path: 'file.js',
+				contents: Buffer.from(''),
+			}),
+		);
+		stream.end();
+
+		const files = await promise;
+
+		expect(files.length).toBe(2);
+		expect(files[0].path).toContain('file.js');
+		expect(files[1].path).toBe('meta.json');
+	});
+});
+
+describe('Given resolve options', () => {
+	it('When resolveExtensions is not provided', async () => {
+		const stream = gulpEsbuild({
+			entryPoints: ['entry.js'],
+			bundle: true,
+		});
+		const promise = wrapStream(stream);
+
+		stream.write(new Vinyl({ path: 'a.tsx', contents: Buffer.from('') }));
+		stream.write(new Vinyl({ path: 'b.ts', contents: Buffer.from('') }));
+		stream.write(new Vinyl({ path: 'c.jsx', contents: Buffer.from('') }));
+		stream.write(new Vinyl({ path: 'd.js', contents: Buffer.from('') }));
+		stream.write(new Vinyl({ path: 'e.css', contents: Buffer.from('') }));
+		stream.write(new Vinyl({ path: 'f.json', contents: Buffer.from('{}') }));
+		stream.write(
+			new Vinyl({
+				path: 'entry.js',
+				contents: Buffer.from(
+					'import "./a";\n' +
+						'import "./b";\n' +
+						'import "./c";\n' +
+						'import "./d";\n' +
+						'import "./e";\n' +
+						'import "./f";\n',
+				),
+			}),
+		);
+		stream.end();
+
+		await expect(promise).resolves.toBeDefined();
+	});
+
+	it('When resolveExtensions is not provided and unresolved extension is used', async () => {
+		expect.assertions(1);
+		const stream = gulpEsbuild({
+			entryPoints: ['entry.js'],
+			bundle: true,
+		});
+		const promise = wrapStream(stream);
+
+		stream.write(new Vinyl({ path: 'a.unknown', contents: Buffer.from('') }));
+		stream.write(
+			new Vinyl({
+				path: 'entry.js',
+				contents: Buffer.from('import "./a";'),
+			}),
+		);
+		stream.end();
+
+		await expect(promise).rejects.toThrow('Could not resolve "./a"');
+	});
+
+	it('When resolveExtensions is provided', async () => {
+		const stream = gulpEsbuild({
+			entryPoints: ['entry.js'],
+			resolveExtensions: ['.js', '.jsx'],
+			bundle: true,
+		});
+		const promise = wrapStream(stream);
+
+		stream.write(
+			new Vinyl({
+				path: 'entry.js',
+				contents: Buffer.from('import "./file";'),
+			}),
+		);
+		stream.write(
+			new Vinyl({
+				path: 'file.jsx',
+				contents: Buffer.from('console.log("hello");'),
+			}),
+		);
+		stream.end();
+
+		await expect(promise).resolves.toBeDefined();
+	});
+
+	it('When resolveExtensions is provided and unresolved extension is used', async () => {
+		expect.assertions(1);
+		const stream = gulpEsbuild({
+			entryPoints: ['entry.js'],
+			resolveExtensions: ['.js'],
+			bundle: true,
+		});
+		const promise = wrapStream(stream);
+
+		stream.write(
+			new Vinyl({
+				path: 'entry.js',
+				contents: Buffer.from('import "./a";'),
+			}),
+		);
+		stream.write(
+			new Vinyl({
+				path: 'a.jsx',
+				contents: Buffer.from(''),
+			}),
+		);
+		stream.end();
+
+		await expect(promise).rejects.toThrow('Could not resolve "./a"');
+	});
+});

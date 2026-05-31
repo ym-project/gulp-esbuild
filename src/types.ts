@@ -5,10 +5,11 @@ export type CreateGulpEsbuildOptions = {
 	incremental?: boolean;
 };
 
-export type PluginOptions =
-	& Omit<BuildOptions, 'write' | 'incremental' | 'stdin' | 'watch'>
-	& Required<Pick<BuildOptions, 'entryPoints'>>
-	& {
+export type PluginOptions = Omit<
+	BuildOptions,
+	'write' | 'stdin' | 'absWorkingDir' | 'allowOverwrite'
+> &
+	Required<Pick<BuildOptions, 'entryPoints'>> & {
 		/** Metafile name */
 		metafileName?: string;
 	};

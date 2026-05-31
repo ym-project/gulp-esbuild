@@ -3,6 +3,8 @@ import type { BufferFile } from 'vinyl';
 import nodePath from 'node:path';
 
 const NAMESPACE = 'gulp-virtual-file';
+// Esbuild's default resolve extensions
+const DEFAULT_RESOLVE_EXTENSIONS = ['.tsx', '.ts', '.jsx', '.js', '.css', '.json'];
 
 export const resolvePlugin = (virtualFiles: Array<BufferFile>): Plugin => ({
 	name: 'gulp-esbuild-resolve-plugin',
@@ -13,10 +15,21 @@ export const resolvePlugin = (virtualFiles: Array<BufferFile>): Plugin => ({
 				file,
 			]),
 		);
+		const resolveExtensions =
+			build.initialOptions.resolveExtensions ?? DEFAULT_RESOLVE_EXTENSIONS;
 
 		const findVirtualFileKey = (path: string) => {
 			if (fileMap.has(path)) {
 				return path;
+			}
+
+			// Check files without extensions
+			for (const extension of resolveExtensions) {
+				const candidate = `${path}${extension}`;
+
+				if (fileMap.has(candidate)) {
+					return candidate;
+				}
 			}
 
 			// Esbuild default behavior
