@@ -19,6 +19,9 @@
 		"type": "git",
 		"url": "https://github.com/ym-project/gulp-esbuild/tree/v0"
 	},
+	"files": [
+		"dist"
+	],
 	"type": "module",
 	"main": "./dist/plugin.cjs",
 	"module": "./dist/plugin.mjs",
@@ -36,9 +39,6 @@
 		},
 		"./package.json": "./package.json"
 	},
-	"files": [
-		"dist"
-	],
 	"scripts": {
 		"build": "node --import=tsx ./scripts/build.ts",
 		"check:attw": "sh scripts/check-attw.sh",
