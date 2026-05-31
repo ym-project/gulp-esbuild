@@ -1,0 +1,11 @@
+{
+	"private": true,
+	"scripts": {
+		"build": "gulp build"
+	},
+	"devDependencies": {
+		"esbuild": "^0.28.0",
+		"gulp": "^5.0.1",
+		"gulp-esbuild": "latest"
+	}
+}
