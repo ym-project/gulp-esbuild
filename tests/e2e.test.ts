@@ -1,3 +1,4 @@
+import path from 'node:path';
 import { Readable } from 'node:stream';
 import { describe, it, expect } from '@jest/globals';
 import Vinyl from 'vinyl';
@@ -280,5 +281,185 @@ describe('Given resolve options', () => {
 		stream.end();
 
 		await expect(promise).rejects.toThrow('Could not resolve "./a"');
+	});
+});
+
+describe('Given build process', () => {
+	it('When all virtual files passed', async () => {
+		const stream = gulpEsbuild({
+			entryPoints: ['entry.js'],
+			bundle: true,
+		});
+		const promise = wrapStream(stream);
+
+		stream.write(
+			new Vinyl({
+				path: 'entry.js',
+				contents: Buffer.from('import "./file.js";'),
+			}),
+		);
+		stream.write(
+			new Vinyl({
+				path: 'file.js',
+				contents: Buffer.from('console.log("Hello, world!");'),
+			}),
+		);
+		stream.end();
+
+		const files = await promise;
+
+		expect(files.length).toBe(1);
+		expect(files[0].path).toContain('entry.js');
+		expect(files[0].contents?.toString()).toContain('console.log("Hello, world!");');
+	});
+
+	it('When one of files is on the disk', async () => {
+		const stream = gulpEsbuild({
+			entryPoints: ['./tests/entry.js'],
+			bundle: true,
+			loader: {
+				'.ts': 'ts',
+			},
+		});
+		const promise = wrapStream(stream);
+
+		stream.write(
+			new Vinyl({
+				path: path.resolve(process.cwd(), 'tests', 'entry.js'),
+				contents: Buffer.from('import {hello} from "./fixtures/file.ts";\nhello();'),
+			}),
+		);
+		stream.end();
+
+		const files = await promise;
+
+		expect(files.length).toBe(1);
+		expect(files[0].path).toContain('entry.js');
+		expect(files[0].contents?.toString()).toContain('console.log("Hello, world!");');
+	});
+});
+
+describe('Given loader options', () => {
+	it('When loader is not provided', async () => {
+		const stream = gulpEsbuild({
+			entryPoints: ['entry.js'],
+			bundle: true,
+		});
+		const promise = wrapStream(stream);
+
+		stream.write(
+			new Vinyl({
+				path: 'entry.js',
+				contents: Buffer.from(''),
+			}),
+		);
+		stream.end();
+
+		await expect(promise).resolves.toBeDefined();
+	});
+
+	it('When loader is not provided and file extension is unknown', async () => {
+		expect.assertions(1);
+		const stream = gulpEsbuild({
+			entryPoints: ['entry.abc'],
+			bundle: true,
+		});
+		const promise = wrapStream(stream);
+
+		stream.write(
+			new Vinyl({
+				path: 'entry.abc',
+				contents: Buffer.from(''),
+			}),
+		);
+		stream.end();
+
+		await expect(promise).rejects.toThrow('No loader configured for file: entry.abc');
+	});
+
+	it('When loader is provided', async () => {
+		const stream = gulpEsbuild({
+			entryPoints: ['entry.abc'],
+			bundle: true,
+			loader: {
+				'.abc': 'text',
+			},
+		});
+		const promise = wrapStream(stream);
+
+		stream.write(
+			new Vinyl({
+				path: 'entry.abc',
+				contents: Buffer.from(''),
+			}),
+		);
+		stream.end();
+
+		await expect(promise).resolves.toBeDefined();
+	});
+
+	it('When loader is not provided and file extension is .module.css', async () => {
+		const stream = gulpEsbuild({
+			entryPoints: ['entry.js'],
+			bundle: true,
+		});
+		const promise = wrapStream(stream);
+
+		stream.write(
+			new Vinyl({
+				path: 'entry.js',
+				contents: Buffer.from('import css from "./file.module.css"; console.log(css.a)'),
+			}),
+		);
+		stream.write(
+			new Vinyl({
+				path: 'file.module.css',
+				contents: Buffer.from('.a { color: red; }'),
+			}),
+		);
+		stream.end();
+
+		const files = await promise;
+
+		expect(files.length).toBe(2);
+		expect(files[0].path).toContain('entry.js');
+		expect(files[1].path).toContain('entry.css');
+		// Css class was renamed to file_a. It means that css-local loader works
+		expect(files[0].contents?.toString()).toContain('file_a');
+		expect(files[1].contents?.toString()).toContain('.file_a');
+	});
+
+	it('When loader is not provided and file extension is .css', async () => {
+		const stream = gulpEsbuild({
+			entryPoints: ['entry.js'],
+			bundle: true,
+		});
+		const promise = wrapStream(stream);
+
+		stream.write(
+			new Vinyl({
+				path: 'entry.js',
+				contents: Buffer.from('import css from "./file.css"; console.log(css.a)'),
+			}),
+		);
+		stream.write(
+			new Vinyl({
+				path: 'file.css',
+				contents: Buffer.from('.a { color: red; }'),
+			}),
+		);
+		stream.end();
+
+		const files = await promise;
+
+		console.log(files[0].contents?.toString());
+		console.log(files[1].contents?.toString());
+
+		expect(files.length).toBe(2);
+		expect(files[0].path).toContain('entry.js');
+		expect(files[1].path).toContain('entry.css');
+		// Css class was not renamed to file_a. It means that css loader works
+		expect(files[0].contents?.toString()).not.toContain('file_a');
+		expect(files[1].contents?.toString()).toContain('.a');
 	});
 });
