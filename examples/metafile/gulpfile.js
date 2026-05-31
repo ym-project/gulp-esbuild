@@ -1,5 +1,5 @@
 const { src, dest } = require('gulp');
-const { gulpEsbuild } = require('../..');
+const { gulpEsbuild } = require('gulp-esbuild');
 
 function buildUsingDefaultName() {
 	return src('./src/*.js')
@@ -9,7 +9,13 @@ function buildUsingDefaultName() {
 
 function buildUsingCustomName() {
 	return src('./src/*.js')
-		.pipe(gulpEsbuild({ entryPoints: ['src/index.js'], metafile: true, metafileName: 'stats.json' }))
+		.pipe(
+			gulpEsbuild({
+				entryPoints: ['src/index.js'],
+				metafile: true,
+				metafileName: 'stats.json',
+			}),
+		)
 		.pipe(dest('./dist'));
 }
 
