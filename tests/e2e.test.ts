@@ -452,9 +452,6 @@ describe('Given loader options', () => {
 
 		const files = await promise;
 
-		console.log(files[0].contents?.toString());
-		console.log(files[1].contents?.toString());
-
 		expect(files.length).toBe(2);
 		expect(files[0].path).toContain('entry.js');
 		expect(files[1].path).toContain('entry.css');
